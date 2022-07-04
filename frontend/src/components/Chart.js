@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
+import { Line } from "react-chartjs-2";
 
 const Chart = () => {
-  return <div>Chart</div>;
+  return <div id="chart">Display the Chart</div>;
 };
 
 export default Chart;
