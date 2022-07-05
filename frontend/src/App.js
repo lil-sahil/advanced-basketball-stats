@@ -1,10 +1,11 @@
 // Component Import
 import Chart from "./components/Chart";
 import SearchFields from "./components/SearchFields";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 function App() {
   let [playerName, setPlayerName] = useState();
+  let [playerData, setPlayerData] = useState([]);
 
   const changeHandler = (e) => {
     setPlayerName(e.target.value);
@@ -17,7 +18,7 @@ function App() {
     });
     let data = await response.json();
 
-    console.log(data);
+    setPlayerData(data);
   };
 
   return (
@@ -26,7 +27,7 @@ function App() {
         changeHandler={changeHandler}
         clickHandler={clickHandler}
       ></SearchFields>
-      <Chart></Chart>
+      <Chart playerData={playerData}></Chart>
     </div>
   );
 }
