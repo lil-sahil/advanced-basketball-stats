@@ -44,7 +44,7 @@ const Chart = (props) => {
       {
         label: "Dataset 1",
         data: props.playerData.map((item) =>
-          parseFloat(item.Data[0].pts_per_g)
+          parseFloat(item.Data[0][props.statSelection])
         ),
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(255, 99, 132, 0.5)",
