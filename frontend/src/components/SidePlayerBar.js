@@ -11,8 +11,9 @@ const SidePlayerBar = (props) => {
       let response = await fetch(
         `http://data.nba.net/data/10s/prod/v1/${latestYear}/players.json`
       );
-
-      setData(await response.json());
+      let dataResponse = await response.json();
+      setData(dataResponse);
+      getPlayerId(dataResponse);
     };
 
     // Prevent from running if the platerData array is empty. i.e User did not specify a player
@@ -20,10 +21,6 @@ const SidePlayerBar = (props) => {
       getImageData();
     }
   }, [props.playerData]);
-
-  useEffect(() => {
-    getPlayerId(data);
-  }, [data]);
 
   const getPlayerId = (data) => {
     if (data) {
