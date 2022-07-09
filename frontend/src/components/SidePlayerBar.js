@@ -3,7 +3,7 @@ import { useState } from "react";
 
 const SidePlayerBar = (props) => {
   let [data, setData] = useState();
-  let [playerId, setPlayerId] = useState();
+  let [playerId, setPlayerId] = useState("");
 
   useEffect(() => {
     const getImageData = async () => {
@@ -23,28 +23,37 @@ const SidePlayerBar = (props) => {
   }, [props.playerData]);
 
   const getPlayerId = (data) => {
+    let foundId = false;
     if (data) {
       data.league.standard.map((player) => {
         let name = `${player.firstName} ${player.lastName}`.toLowerCase();
         if (name === props.playerName.toLowerCase()) {
+          foundId = true;
           setPlayerId(player.personId);
         }
       });
     }
-    console.log("I finished in getPlayerId");
+
+    return foundId ? 1 : setPlayerId("");
   };
 
-  return (
-    <div>
+  let successPlayerIdEle = (
+    <>
       <div id="player-profile-picture">
         <img
           src={`https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${playerId}.png`}
         ></img>
       </div>
 
-      <div id="player-name">{props.playerName}</div>
+      <div id="player-name">{props.playerData[0].Data[0].player}</div>
       <div id="player-born"></div>
-    </div>
+    </>
+  );
+
+  let nonSuccessPlayerIdEle = <></>;
+
+  return (
+    <div>{playerId === "" ? nonSuccessPlayerIdEle : successPlayerIdEle}</div>
   );
 };
 
