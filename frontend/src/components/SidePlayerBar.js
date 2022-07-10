@@ -19,6 +19,8 @@ const SidePlayerBar = (props) => {
     // Prevent from running if the platerData array is empty. i.e User did not specify a player
     if (props.playerData.length > 0) {
       getImageData();
+    } else {
+      setPlayerId("");
     }
   }, [props.playerData]);
 
@@ -33,8 +35,6 @@ const SidePlayerBar = (props) => {
         }
       });
     }
-
-    return foundId ? 1 : setPlayerId("");
   };
 
   let successPlayerIdEle = (
@@ -45,7 +45,7 @@ const SidePlayerBar = (props) => {
         ></img>
       </div>
 
-      <div id="player-name">{props.playerData[0].Data[0].player}</div>
+      <div id="player-name">{props.playerData[0]?.Data[0]?.player}</div>
       <div id="player-born"></div>
     </>
   );

@@ -10,6 +10,10 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 
+import { useEffect, useState } from "react";
+
+import { main } from "../utils/statCalcs";
+
 const Chart = (props) => {
   ChartJS.register(
     CategoryScale,
@@ -38,6 +42,21 @@ const Chart = (props) => {
     return item.Year;
   });
 
+  let [graphData, setGraphData] = useState();
+
+  useEffect(() => {
+    let test = async () => {
+      setGraphData(
+        await Promise.all(
+          labels.map((year) => {
+            return main(year, props.statSelection, 25);
+          })
+        )
+      );
+    };
+    test();
+  }, [props.statSelection]);
+
   const data = {
     labels,
     datasets: [
@@ -49,8 +68,14 @@ const Chart = (props) => {
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(255, 99, 132, 0.5)",
       },
+      {
+        label: "25th percentile",
+        data: graphData,
+      },
     ],
   };
+
+  console.log(data.datasets[1]);
 
   return (
     <div id="chart">
