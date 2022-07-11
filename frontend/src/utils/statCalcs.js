@@ -5,10 +5,21 @@ const fetchYearlyData = async (year, stat) => {
   return await response.json();
 };
 
+const removeNanVals = (array) => {
+  array = array.filter((item) => {
+    if (!isNaN(item)) {
+      return item;
+    }
+  });
+
+  return array;
+};
+
 const percentileRank = (data, stat, percentile) => {
   data = data.map((item) => {
     return parseFloat(item[stat]);
   });
+  data = removeNanVals(data);
   let sortedArray = data.sort((a, b) => a - b);
   let rank = Math.floor((percentile / 100) * (sortedArray.length + 1));
   return sortedArray[rank];

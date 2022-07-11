@@ -17,6 +17,7 @@ function App() {
         playerName={playerName}
         setStatSelection={setStatSelection}
       ></SearchFields>
+
       <Chart playerData={playerData} statSelection={statSelection}></Chart>
 
       <SidePlayerBar

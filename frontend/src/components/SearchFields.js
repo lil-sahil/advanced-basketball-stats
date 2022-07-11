@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 
 // Configuration files
 import { stats } from "../config/statConfig";
@@ -20,6 +21,11 @@ const SearchFields = (props) => {
 
     props.setPlayerData(data);
   };
+
+  // Useeffect hook will run on initial render to show the data for the mp_per_g
+  useEffect(() => {
+    props.setStatSelection("mp_per_g");
+  }, []);
 
   return (
     <div>
