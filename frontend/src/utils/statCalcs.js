@@ -2,7 +2,8 @@ const fetchYearlyData = async (year, stat) => {
   let response = await fetch(
     `http://localhost:5000/api/yearly_data/${year}/${stat}`
   );
-  return await response.json();
+  console.log("Herer");
+  return response.json();
 };
 
 const removeNanVals = (array) => {

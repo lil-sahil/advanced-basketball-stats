@@ -49,13 +49,15 @@ const Chart = (props) => {
       setGraphData(
         await Promise.all(
           labels.map((year) => {
+            console.log("Iamhere");
             return main(year, props.statSelection, 25);
           })
         )
       );
     };
     test();
-  }, [props.statSelection]);
+    console.log("I ran!");
+  }, [props.statSelection, props.playerData]);
 
   const data = {
     labels,
@@ -75,7 +77,7 @@ const Chart = (props) => {
     ],
   };
 
-  console.log(data.datasets[1]);
+  // console.log(data.datasets[1]);
 
   return (
     <div id="chart">
