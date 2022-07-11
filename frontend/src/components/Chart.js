@@ -6,6 +6,7 @@ import {
   LineElement,
   Title,
   Tooltip,
+  Filler,
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
@@ -22,12 +23,26 @@ const Chart = (props) => {
     LineElement,
     Title,
     Tooltip,
+    Filler,
     Legend
   );
 
   const options = {
     responsive: true,
     plugins: {
+      tooltip: {
+        callbacks: {
+          label: function (context) {
+            let label = context.dataset.label || "";
+
+            if (context.dataset.label === "100th percentile") {
+              label += ": ";
+              label += context.dataset.playerName[context.dataIndex];
+            }
+            return label;
+          },
+        },
+      },
       legend: {
         position: "top",
       },
@@ -61,7 +76,7 @@ const Chart = (props) => {
       }
       setGraphData(percentileDataArray);
     };
-    getData([25, 50, 75]);
+    getData([25, 50, 75, 100]);
   }, [props.statSelection, props.playerData]);
 
   const data = {
@@ -76,16 +91,28 @@ const Chart = (props) => {
         backgroundColor: "rgba(255, 99, 132, 0.5)",
       },
       {
+        fill: true,
+        backgroundColor: "rgba(53, 162, 235, 0.5)",
         label: "25th percentile",
-        data: graphData[0],
+        data: graphData[0]?.map((item) => item[props.statSelection]),
       },
       {
+        fill: "-1",
         label: "50th percentile",
-        data: graphData[1],
+        data: graphData[1]?.map((item) => item[props.statSelection]),
       },
       {
+        fill: "-1",
+        backgroundColor: "rgba(53, 162, 235, 0.5)",
         label: "75th percentile",
-        data: graphData[2],
+        data: graphData[2]?.map((item) => item[props.statSelection]),
+      },
+      {
+        fill: "-1",
+        backgroundColor: "rgba(10, 162, 235, 0.5)",
+        label: "100th percentile",
+        data: graphData[3]?.map((item) => item[props.statSelection]),
+        playerName: graphData[3]?.map((item) => item.player),
       },
     ],
   };
