@@ -42,21 +42,26 @@ const Chart = (props) => {
     return item.Year;
   });
 
-  let [graphData, setGraphData] = useState();
+  let [graphData, setGraphData] = useState([]);
 
   useEffect(() => {
-    let test = async () => {
-      setGraphData(
-        await Promise.all(
+    let getData = async (arrayOfPercentiles) => {
+      // Clear state on re-render
+      setGraphData([]);
+
+      // Loop through the percentiles and fetch the results and save in state.
+      let percentileDataArray = [];
+      for (let percentile of arrayOfPercentiles) {
+        let data = await Promise.all(
           labels.map((year) => {
-            console.log("Iamhere");
-            return main(year, props.statSelection, 25);
+            return main(year, props.statSelection, percentile);
           })
-        )
-      );
+        );
+        percentileDataArray.push(data);
+      }
+      setGraphData(percentileDataArray);
     };
-    test();
-    console.log("I ran!");
+    getData([25, 50, 75]);
   }, [props.statSelection, props.playerData]);
 
   const data = {
@@ -72,12 +77,18 @@ const Chart = (props) => {
       },
       {
         label: "25th percentile",
-        data: graphData,
+        data: graphData[0],
+      },
+      {
+        label: "50th percentile",
+        data: graphData[1],
+      },
+      {
+        label: "75th percentile",
+        data: graphData[2],
       },
     ],
   };
-
-  // console.log(data.datasets[1]);
 
   return (
     <div id="chart">
