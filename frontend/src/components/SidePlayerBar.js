@@ -25,12 +25,11 @@ const SidePlayerBar = (props) => {
   }, [props.playerData]);
 
   const getPlayerId = (data) => {
-    let foundId = false;
+    setPlayerId("");
     if (data) {
       data.league.standard.map((player) => {
         let name = `${player.firstName} ${player.lastName}`.toLowerCase();
         if (name === props.playerName.toLowerCase()) {
-          foundId = true;
           setPlayerId(player.personId);
         }
       });
