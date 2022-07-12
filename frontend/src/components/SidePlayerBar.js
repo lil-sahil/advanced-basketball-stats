@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 
+// Utils
+import { removeAccents } from "../utils/stringCleanup";
+
 const SidePlayerBar = (props) => {
   let [data, setData] = useState();
   let [playerId, setPlayerId] = useState("");

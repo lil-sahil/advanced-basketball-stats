@@ -1,13 +1,16 @@
 // Component Import
 import Chart from "./components/Chart";
 import SearchFields from "./components/SearchFields";
-import { useState } from "react";
 import SidePlayerBar from "./components/SidePlayerBar";
+import BadRequest from "./components/BadRequest";
+
+import { useState } from "react";
 
 function App() {
   let [playerName, setPlayerName] = useState();
   let [playerData, setPlayerData] = useState([]);
   let [statSelection, setStatSelection] = useState();
+  let [response, setResponse] = useState(undefined);
 
   return (
     <div>
@@ -17,14 +20,23 @@ function App() {
         playerName={playerName}
         setStatSelection={setStatSelection}
         statSelection={statSelection}
+        setResponse={setResponse}
       ></SearchFields>
 
-      <Chart playerData={playerData} statSelection={statSelection}></Chart>
+      {response !== "Not valid" ? (
+        <Chart playerData={playerData} statSelection={statSelection}></Chart>
+      ) : (
+        <BadRequest></BadRequest>
+      )}
 
-      <SidePlayerBar
-        playerName={playerName}
-        playerData={playerData}
-      ></SidePlayerBar>
+      {response !== "Not valid" ? (
+        <SidePlayerBar
+          playerName={playerName}
+          playerData={playerData}
+        ></SidePlayerBar>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }
