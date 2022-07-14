@@ -21,20 +21,20 @@ const SearchFields = (props) => {
     });
     let data = await response.json();
 
-    if (uniqueNames(data) === 1) {
+    if (uniqueNames(data).size === 1) {
       props.setPlayerData(data);
       return 1;
     }
 
     // More than one player found
-    else if (uniqueNames(data) > 1) {
-      let playerNamesFound = data.map((item) => {
-        return item.Data[0].player;
-      });
+    else if (uniqueNames(data).size > 1) {
+      let playerNamesFound = uniqueNames(data);
 
-      console.log(playerNamesFound);
+      console.log(Array.from(playerNamesFound));
 
-      // Set state with the list of player names found and have the use select who they are looking for.
+      // Set state with the list of player names found and have the user select who they are looking for.
+
+      props.setPlayers(Array.from(playerNamesFound));
 
       return 1;
     }
@@ -47,7 +47,7 @@ const SearchFields = (props) => {
       arr.map((item) => {
         return item.Data[0].player;
       })
-    ).size;
+    );
   };
 
   const clickHandler = async (e) => {

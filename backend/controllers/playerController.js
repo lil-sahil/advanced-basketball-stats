@@ -17,7 +17,10 @@ const getPlayerData = async (req, res) => {
       Year: year,
       Data: await yearlyModel(year.toString())
         .find({
-          player: { $regex: req.params.playerName, $options: "i" },
+          player: {
+            $regex: req.params.playerName,
+            $options: "i",
+          },
         })
         .collation({ locale: "en", strength: 1 }),
     };
