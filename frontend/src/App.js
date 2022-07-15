@@ -28,19 +28,19 @@ function App() {
 
       <PlayerList players={players}></PlayerList>
 
-      {response !== "Not valid" ? (
-        <Chart playerData={playerData} statSelection={statSelection}></Chart>
-      ) : (
+      {response === "Not valid" || response === undefined ? (
         <BadRequest></BadRequest>
+      ) : (
+        <Chart playerData={playerData} statSelection={statSelection}></Chart>
       )}
 
-      {response !== "Not valid" ? (
+      {response === "Not valid" || response === undefined ? (
+        <></>
+      ) : (
         <SidePlayerBar
           playerName={playerName}
           playerData={playerData}
         ></SidePlayerBar>
-      ) : (
-        <></>
       )}
     </div>
   );

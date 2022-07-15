@@ -6,7 +6,6 @@ const PlayerList = (props) => {
       {props.players.map((playerName) => {
         return <div>{playerName}</div>;
       })}
-      <div>PlayerList</div>
     </>
   );
 };
