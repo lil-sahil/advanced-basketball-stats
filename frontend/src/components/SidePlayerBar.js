@@ -1,43 +1,10 @@
 import React, { useEffect } from "react";
-import { useState } from "react";
 
-// Utils
-import { removeAccents } from "../utils/stringCleanup";
+// Custom Hooks
+import { useFetchPlayerId } from "../hooks/useFetchPlayerId";
 
 const SidePlayerBar = (props) => {
-  let [data, setData] = useState();
-  let [playerId, setPlayerId] = useState("");
-
-  useEffect(() => {
-    const getImageData = async () => {
-      let latestYear = (await props.playerData.slice(-1)[0].Year) - 1;
-      let response = await fetch(
-        `http://data.nba.net/data/10s/prod/v1/${latestYear}/players.json`
-      );
-      let dataResponse = await response.json();
-      setData(dataResponse);
-      getPlayerId(dataResponse);
-    };
-
-    // Prevent from running if the platerData array is empty. i.e User did not specify a player
-    if (props.playerData.length > 0) {
-      getImageData();
-    } else {
-      setPlayerId("");
-    }
-  }, [props.playerData]);
-
-  const getPlayerId = (data) => {
-    setPlayerId("");
-    if (data) {
-      data.league.standard.map((player) => {
-        let name = `${player.firstName} ${player.lastName}`.toLowerCase();
-        if (name === props.playerName.toLowerCase()) {
-          setPlayerId(player.personId);
-        }
-      });
-    }
-  };
+  let playerId = useFetchPlayerId(props.playerData, props.playerName);
 
   let successPlayerIdEle = (
     <>

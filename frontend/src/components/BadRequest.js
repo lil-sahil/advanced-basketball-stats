@@ -1,7 +1,7 @@
 import React from "react";
 
 const BadRequest = () => {
-  return <div>BadRequest</div>;
+  return <div></div>;
 };
 
 export default BadRequest;
