@@ -3,7 +3,6 @@ import React from "react";
 const PlayerList = (props) => {
   const handleClick = (e) => {
     props.setPlayerName(e.target.innerHTML);
-
     fetchData(e.target.innerHTML);
   };
 
