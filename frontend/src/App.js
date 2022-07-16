@@ -26,7 +26,16 @@ function App() {
         setPlayers={setPlayers}
       ></SearchFields>
 
-      <PlayerList players={players}></PlayerList>
+      {response === "good" ? (
+        <></>
+      ) : (
+        <PlayerList
+          players={players}
+          setPlayerName={setPlayerName}
+          setPlayerData={setPlayerData}
+          setResponse={setResponse}
+        ></PlayerList>
+      )}
 
       {response === "Not valid" || response === undefined ? (
         <BadRequest></BadRequest>

@@ -31,8 +31,6 @@ const SearchFields = (props) => {
     else if (uniqueNames(data).size > 1) {
       let playerNamesFound = uniqueNames(data);
 
-      console.log(Array.from(playerNamesFound));
-
       // Set state with the list of player names found and have the user select who they are looking for.
 
       props.setPlayers(Array.from(playerNamesFound));
@@ -98,6 +96,7 @@ const SearchFields = (props) => {
           name="playerName"
           onChange={(e) => changeHandler(e, props.setPlayerName)}
           placeholder="Player Name..."
+          value={props.playerName}
         ></input>
         <label htmlFor="stats">Choose a stat:</label>
         <select
