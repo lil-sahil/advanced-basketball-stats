@@ -1,23 +1,23 @@
 const mongoose = require("mongoose");
 
-const connectDB = async () => {
-  try {
-    const conn = await mongoose.connect(process.env.MONGO_URI);
-    console.log(`MongoDB Connected: ${conn.connection.host}`);
-  } catch (error) {
-    console.log(error);
-    process.exit(1);
-  }
-};
+// const connectDB = async () => {
+//   try {
+//     const conn = await mongoose.connect(process.env.MONGO_URI);
+//     console.log(`MongoDB Connected: ${conn.connection.host}`);
+//   } catch (error) {
+//     console.log(error);
+//     process.exit(1);
+//   }
+// };
 
 const connectDBGeneral = async () => {
   try {
     const conn = await mongoose.connect(process.env.MONGO_URI_GENERAL);
-    console.log(`MongoDB Connected: ${conn.connection.host}`);
+    console.log(`MongoDB Connected to General DB: ${conn.connection.host}`);
   } catch (error) {
     console.log(error);
     process.exit(1);
   }
 };
 
-module.exports = { connectDB, connectDBGeneral };
+module.exports = { connectDBGeneral };

@@ -30,6 +30,6 @@ const generalSchema = mongoose.Schema({
 });
 
 const generalStatsModel = () => {
-  return mongoose.model("generalModel", generalSchema);
+  return mongoose.model("generalModel", generalSchema, "player-data");
 };
 module.exports = generalStatsModel;
