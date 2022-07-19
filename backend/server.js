@@ -1,11 +1,10 @@
 const express = require("express");
 const dotenv = require("dotenv").config();
-const { connectDB } = require("./config/db");
-const { connectDBGeneral } = require("./config/db");
 const cors = require("cors");
+const { default: mongoose } = require("mongoose");
+const makeConnectionToDb = require("./config/db");
 
-// connectDB();
-connectDBGeneral();
+makeConnectionToDb();
 
 const port = process.env.PORT || 5000;
 

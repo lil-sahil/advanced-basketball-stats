@@ -1,5 +1,5 @@
 const yearlyModel = require("../models/yearlyModels");
-const generalModel = require("../models/generalPlayerModel");
+const generalStatsModel = require("../models/generalPlayerModel");
 
 // @desc    GET Player Data
 // @route   GET /api/:playerData
@@ -39,7 +39,7 @@ const getPlayerData = async (req, res) => {
 
 const getGeneralPlayerData = async (req, res) => {
   let results = {
-    Data: await generalModel().find({
+    Data: await generalStatsModel.find({
       PLAYER_SLUG: {
         $regex: req.params.playerName,
         $options: "i",

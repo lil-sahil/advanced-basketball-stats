@@ -54,7 +54,10 @@ const yearlySchema = mongoose.Schema({
   vorp: String,
 });
 
+const myDB = mongoose.connection.useDb("stats");
+
 const yearlyModel = (year) => {
-  return mongoose.model("yearlyData", yearlySchema, year);
+  return myDB.model(year, yearlySchema, year);
 };
+
 module.exports = yearlyModel;
