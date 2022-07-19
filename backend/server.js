@@ -1,9 +1,11 @@
 const express = require("express");
 const dotenv = require("dotenv").config();
-const connectDB = require("./config/db");
+const { connectDB } = require("./config/db");
+const { connectDBGeneral } = require("./config/db");
 const cors = require("cors");
 
 connectDB();
+connectDBGeneral();
 
 const port = process.env.PORT || 5000;
 

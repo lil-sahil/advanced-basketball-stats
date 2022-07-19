@@ -1,7 +1,5 @@
 const yearlyModel = require("../models/yearlyModels");
-
-// Utils
-const { removeAccents } = require("../utils/stringManipulation");
+const generalModel = require("../models/generalPlayerModel");
 
 // @desc    GET Player Data
 // @route   GET /api/:playerData
@@ -35,6 +33,28 @@ const getPlayerData = async (req, res) => {
   }
 };
 
+// @desc    GET Player Data
+// @route   GET /api/general/:playerData
+// @access  Public
+
+const getGeneralPlayerData = async (req, res) => {
+  let results = {
+    Data: await generalModel().find({
+      PLAYER_SLUG: {
+        $regex: req.params.playerName,
+        $options: "i",
+      },
+    }),
+  };
+
+  if (results.length === 0) {
+    res.status(400).json([]);
+  } else {
+    res.status(200).json(results);
+  }
+};
+
 module.exports = {
   getPlayerData,
+  getGeneralPlayerData,
 };

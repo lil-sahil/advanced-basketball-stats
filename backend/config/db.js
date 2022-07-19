@@ -10,4 +10,14 @@ const connectDB = async () => {
   }
 };
 
-module.exports = connectDB;
+const connectDBGeneral = async () => {
+  try {
+    const conn = await mongoose.connect(process.env.MONGO_URI_GENERAL);
+    console.log(`MongoDB Connected: ${conn.connection.host}`);
+  } catch (error) {
+    console.log(error);
+    process.exit(1);
+  }
+};
+
+module.exports = { connectDB, connectDBGeneral };
