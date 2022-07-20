@@ -4,13 +4,13 @@ import React, { useEffect } from "react";
 import { useFetchPlayerId } from "../hooks/useFetchPlayerId";
 
 const SidePlayerBar = (props) => {
-  let playerId = useFetchPlayerId(props.playerData, props.playerName);
+  let playerId = useFetchPlayerId([props.playerData], props.playerName);
 
   let successPlayerIdEle = (
     <>
       <div id="player-profile-picture">
         <img
-          src={`https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${playerId}.png`}
+          src={`https://cdn.nba.com/headshots/nba/latest/1040x760/${playerId}.png`}
         ></img>
       </div>
 

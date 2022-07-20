@@ -15,6 +15,8 @@ import { useEffect, useState } from "react";
 
 import { main } from "../utils/statCalcs";
 
+import { getPlayerId } from "../utils/getPlayerId";
+
 const Chart = (props) => {
   ChartJS.register(
     CategoryScale,
@@ -27,43 +29,22 @@ const Chart = (props) => {
     Legend
   );
 
-  const getPlayerId = (data, playerName) => {
-    let playerId;
-    data.league.standard.map((player) => {
-      let name = `${player.firstName} ${player.lastName}`.toLowerCase();
-      if (name === playerName.toLowerCase()) {
-        playerId = player.personId;
-      }
-    });
-
-    return playerId;
-  };
-
   const getTopPlayersImages = async (labels) => {
     let images = await Promise.all(
       labels.map(async (year, index) => {
-        try {
-          let response = await fetch(
-            `http://data.nba.net/data/10s/prod/v1/${year}/players.json`
-          );
-          let dataResponse = await response.json();
+        let playerId = await getPlayerId(graphData[3][index].player);
 
-          let playerId = getPlayerId(dataResponse, graphData[3][index].player);
-          if (playerId === undefined) {
-            playerId = "1629630";
-          }
+        let img = new Image(82.11, 60);
+        img.src = `https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${playerId}.png`;
 
-          let img = new Image(82.11, 60);
-          img.src = `https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${playerId}.png`;
-          return img;
-        } catch (error) {
-          let img = new Image(20, 20);
-          img.src = `https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/1629630.png`;
-          return img;
-        }
+        img.onerror = ({ currentTarget }) => {
+          currentTarget.onerror = null;
+          currentTarget.src = require("../assets/logoman.png");
+        };
+
+        return img;
       })
     );
-    console.log(images);
     return images;
   };
 
@@ -74,7 +55,6 @@ const Chart = (props) => {
         callbacks: {
           label: function (context) {
             let label = context.dataset.label || "";
-            // console.log(context.dataset.x);
 
             if (context.dataset.label === "100th percentile") {
               label += ": ";
@@ -123,6 +103,7 @@ const Chart = (props) => {
 
   useEffect(() => {
     const updateImages = async () => {
+      setTopPlayerImages([]);
       let images = await getTopPlayersImages(labels);
       setTopPlayerImages(images);
     };

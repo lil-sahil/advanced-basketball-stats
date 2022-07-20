@@ -1,25 +1,27 @@
 import { useEffect, useState } from "react";
 
-export const useFetchPlayerId = (playerData, playerName) => {
+export const useFetchPlayerId = (dependency, playerName) => {
   let [playerId, setPlayerId] = useState("");
 
   const getPlayerId = (data) => {
     setPlayerId("");
-    if (data) {
-      data.league.standard.map((player) => {
-        let name = `${player.firstName} ${player.lastName}`.toLowerCase();
-        if (name === playerName.toLowerCase()) {
-          setPlayerId(player.personId);
-        }
-      });
-    }
+
+    setPlayerId(data.Data[0]["PERSON_ID"].toString());
+  };
+
+  const getPlayerSlug = (playerName) => {
+    let playerFirstName = playerName.split(" ")[0];
+    let playerLastName = playerName.split(" ")[1];
+
+    let playerSlug = `${playerFirstName}-${playerLastName}`;
+    return playerSlug;
   };
 
   useEffect(() => {
     const getImageData = async () => {
-      let latestYear = playerData.slice(-1)[0].Year - 1;
+      let playerSlug = getPlayerSlug(playerName);
       let response = await fetch(
-        `http://data.nba.net/data/10s/prod/v1/${latestYear}/players.json`
+        `http://localhost:5000/api/general/${playerSlug}`
       );
       let dataResponse = await response.json();
 
@@ -27,7 +29,7 @@ export const useFetchPlayerId = (playerData, playerName) => {
     };
 
     getImageData();
-  }, [playerData]);
+  }, dependency);
 
   return playerId;
 };
