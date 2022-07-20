@@ -37,9 +37,8 @@ const Chart = (props) => {
         let img = new Image(82.11, 60);
         img.src = `https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${playerId}.png`;
 
-        img.onerror = ({ currentTarget }) => {
-          currentTarget.onerror = null;
-          currentTarget.src = require("../assets/logoman.png");
+        img.onerror = () => {
+          img.src = require("../assets/logoman.png");
         };
 
         return img;
@@ -101,13 +100,20 @@ const Chart = (props) => {
     getData([25, 50, 75, 100]);
   }, [props.statSelection, props.playerData]);
 
+  function sleep(ms) {
+    return new Promise((resolveFunc) => setTimeout(resolveFunc, ms));
+  }
+
   useEffect(() => {
     const updateImages = async () => {
       setTopPlayerImages([]);
       let images = await getTopPlayersImages(labels);
+      await sleep(2000);
       setTopPlayerImages(images);
     };
-    updateImages();
+    if (graphData[3]) {
+      updateImages();
+    }
   }, [graphData]);
 
   const data = {
