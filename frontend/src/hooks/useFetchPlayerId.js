@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { getPlayerSlug } from "../utils/getPlayerId";
 
 export const useFetchPlayerId = (dependency, playerName) => {
   let [playerId, setPlayerId] = useState("");
@@ -7,14 +8,6 @@ export const useFetchPlayerId = (dependency, playerName) => {
     setPlayerId("");
 
     setPlayerId(data.Data[0]["PERSON_ID"].toString());
-  };
-
-  const getPlayerSlug = (playerName) => {
-    let playerFirstName = playerName.split(" ")[0];
-    let playerLastName = playerName.split(" ")[1];
-
-    let playerSlug = `${playerFirstName}-${playerLastName}`;
-    return playerSlug;
   };
 
   useEffect(() => {
