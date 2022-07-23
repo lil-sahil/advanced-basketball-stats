@@ -15,7 +15,7 @@ function App() {
   let [players, setPlayers] = useState([]);
 
   return (
-    <div>
+    <div className="flex flex-col justify-center items-center">
       <SearchFields
         setPlayerName={setPlayerName}
         setPlayerData={setPlayerData}
@@ -37,20 +37,22 @@ function App() {
         ></PlayerList>
       )}
 
-      {response === "Not valid" || response === undefined ? (
-        <BadRequest></BadRequest>
-      ) : (
-        <Chart playerData={playerData} statSelection={statSelection}></Chart>
-      )}
+      <div className="flex h-screen w-screen ">
+        {response === "Not valid" || response === undefined ? (
+          <BadRequest></BadRequest>
+        ) : (
+          <Chart playerData={playerData} statSelection={statSelection}></Chart>
+        )}
 
-      {response === "Not valid" || response === undefined ? (
-        <></>
-      ) : (
-        <SidePlayerBar
-          playerName={playerName}
-          playerData={playerData}
-        ></SidePlayerBar>
-      )}
+        {response === "Not valid" || response === undefined ? (
+          <></>
+        ) : (
+          <SidePlayerBar
+            playerName={playerName}
+            playerData={playerData}
+          ></SidePlayerBar>
+        )}
+      </div>
     </div>
   );
 }

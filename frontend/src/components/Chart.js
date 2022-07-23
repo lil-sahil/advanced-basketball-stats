@@ -17,6 +17,8 @@ import { main } from "../utils/statCalcs";
 
 import { getPlayerId } from "../utils/getPlayerId";
 
+import { fetchGeneralData } from "../utils/fetchGeneralData";
+
 const Chart = (props) => {
   ChartJS.register(
     CategoryScale,
@@ -32,7 +34,8 @@ const Chart = (props) => {
   const getTopPlayersImages = async (labels) => {
     let images = await Promise.all(
       labels.map(async (year, index) => {
-        let playerId = await getPlayerId(graphData[3][index].player);
+        let playerData = await fetchGeneralData(graphData[3][index].player);
+        let playerId = await getPlayerId(playerData);
 
         let img = new Image(82.11, 60);
         img.src = `https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${playerId}.png`;
@@ -157,7 +160,7 @@ const Chart = (props) => {
   };
 
   return (
-    <div id="chart">
+    <div id="chart" className="h-4/5 w-full">
       <Line options={options} data={data} />
     </div>
   );

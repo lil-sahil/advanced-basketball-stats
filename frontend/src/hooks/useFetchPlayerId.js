@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getPlayerSlug } from "../utils/getPlayerId";
+import { getPlayerSlug } from "../utils/getPlayerSlug";
 
 export const useFetchPlayerId = (dependency, playerName) => {
   let [playerId, setPlayerId] = useState("");
