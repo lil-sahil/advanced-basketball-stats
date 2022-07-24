@@ -6,5 +6,5 @@ export const fetchGeneralData = async (playerName) => {
   let response = await fetch(`http://localhost:5000/api/general/${playerSlug}`);
   let dataResponse = await response.json();
 
-  return dataResponse.Data.length === 0 ? 0 : dataResponse.Data[0];
+  return dataResponse.Data.length === 0 ? "fail" : dataResponse.Data[0];
 };
