@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Stats from "./Stats";
 
 // Custom Hooks
 import { useFetchPlayerId } from "../hooks/useFetchPlayerId";
@@ -12,23 +13,28 @@ const SidePlayerBar = (props) => {
 
   let successPlayerIdEle = (
     <>
-      <div id="player-profile-picture">
+      <div>
         <img
           src={`https://cdn.nba.com/headshots/nba/latest/1040x760/${playerId}.png`}
         ></img>
       </div>
 
-      <div id="player-name">{props.playerData[0]?.Data[0]?.player}</div>
-      <div id="player-pts">Points: {points}</div>
-      <div id="player-assist">Assists: {assists}</div>
-      <div id="player-rebounds">Rebounds: {rebounds}</div>
+      <div className="font-sidebar-player-name mt-5">
+        {props.playerData[0]?.Data[0]?.player}
+      </div>
+
+      <div className="flex items-center justify-between w-full px-5 mt-5">
+        <Stats statName="PPG" stat={points}></Stats>
+        <Stats statName="APG" stat={assists}></Stats>
+        <Stats statName="RPG" stat={rebounds}></Stats>
+      </div>
     </>
   );
 
   let nonSuccessPlayerIdEle = <></>;
 
   return (
-    <div className="order-first flex-shrink-0 w-96 mx-2 my-2 border-2">
+    <div className="order-first flex-shrink-0 w-96 mx-2 my-2 py-6 px-4 border-2 flex flex-col items-center justify-between">
       {playerId === "" ? nonSuccessPlayerIdEle : successPlayerIdEle}
     </div>
   );

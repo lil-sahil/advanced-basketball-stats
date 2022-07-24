@@ -1,4 +1,5 @@
 // Component Import
+import Title from "./components/Title";
 import Chart from "./components/Chart";
 import SearchFields from "./components/SearchFields";
 import SidePlayerBar from "./components/SidePlayerBar";
@@ -15,7 +16,9 @@ function App() {
   let [players, setPlayers] = useState([]);
 
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className="flex flex-col justify-center items-center h-screen box-border bg-main-background text-white">
+      <Title></Title>
+
       <SearchFields
         setPlayerName={setPlayerName}
         setPlayerData={setPlayerData}
@@ -37,7 +40,7 @@ function App() {
         ></PlayerList>
       )}
 
-      <div className="flex h-screen w-screen ">
+      <div className="flex w-screen ">
         {response === "Not valid" || response === undefined ? (
           <BadRequest></BadRequest>
         ) : (
