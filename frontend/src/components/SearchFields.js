@@ -97,24 +97,30 @@ const SearchFields = (props) => {
           onChange={(e) => changeHandler(e, props.setPlayerName)}
           placeholder="Player Name..."
           value={props.playerName}
+          className="text-black mr-5"
         ></input>
-        <label htmlFor="stats">Choose a stat:</label>
+        <label htmlFor="stats" className="mr-5">
+          Choose a stat:
+        </label>
         <select
           id="stats"
           name="stats"
           onChange={(e) => changeHandler(e, props.setStatSelection)}
+          className="text-black mr-5"
         >
           {stats.map((stat, index) => {
             return index === 1 ? (
-              <option value={stat} defaultValue>
+              <option value={stat} defaultValue className="text-black">
                 {stat}
               </option>
             ) : (
-              <option value={stat}>{stat}</option>
+              <option value={stat} className="text-black">
+                {stat}
+              </option>
             );
           })}
         </select>
-        <button type="submit" onClick={clickHandler}>
+        <button type="submit" onClick={clickHandler} className="border px-1">
           Search
         </button>
       </form>

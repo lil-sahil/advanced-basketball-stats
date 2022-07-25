@@ -38,7 +38,10 @@ const Chart = (props) => {
         let playerId = await getPlayerId(playerData);
 
         let img = new Image(82.11, 60);
+
         img.src = `https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${playerId}.png`;
+        img.style["border"] = "red 1px solid";
+        img.style["border-radius"] = "50%";
 
         img.onerror = () => {
           img.src = require("../assets/logoman.png");
@@ -153,7 +156,6 @@ const Chart = (props) => {
         label: "100th percentile",
         data: graphData[3]?.map((item) => item[props.statSelection]),
         playerName: graphData[3]?.map((item) => item.player),
-
         pointStyle: topPlayerImages,
       },
     ],
