@@ -23,6 +23,7 @@ const SearchFields = (props) => {
 
     if (uniqueNames(data).size === 1) {
       props.setPlayerData(data);
+      props.setPlayerName(data[0].Data[0].player);
       props.setResponse("good");
       return 1;
     }
