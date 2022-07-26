@@ -9,6 +9,9 @@ export const useFetchPlayerGeneralStats = (dependency, playerName) => {
   let [position, setPosition] = useState("");
   let [height, setHeight] = useState("");
   let [weight, setWeight] = useState("");
+  let [teamId, setTeamId] = useState("");
+  let [teamName, setTeamName] = useState("");
+  let [jerseyNumber, setJerseyNumber] = useState("");
 
   useEffect(() => {
     const getStats = async () => {
@@ -20,10 +23,23 @@ export const useFetchPlayerGeneralStats = (dependency, playerName) => {
       setPosition(response["POSITION"]);
       setHeight(response["HEIGHT"]);
       setWeight(response["WEIGHT"]);
+      setTeamId(response["TEAM_ID"]);
+      setTeamName(response["TEAM_NAME"]);
+      setJerseyNumber(response["JERSEY_NUMBER"]);
     };
 
     getStats();
   }, dependency);
 
-  return { points, assists, rebounds, position, height, weight };
+  return {
+    points,
+    assists,
+    rebounds,
+    position,
+    height,
+    weight,
+    teamId,
+    teamName,
+    jerseyNumber,
+  };
 };
