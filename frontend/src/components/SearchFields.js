@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
+import StatListBox from "./headlessUIComponents/ListBox";
 
 // Utils
 import { removeAccents } from "../utils/stringCleanup";
@@ -91,7 +92,7 @@ const SearchFields = (props) => {
 
   return (
     <div>
-      <form>
+      <form className="flex flex-row">
         <input
           type="text"
           name="playerName"
@@ -100,27 +101,8 @@ const SearchFields = (props) => {
           value={props.playerName}
           className="text-black mr-5"
         ></input>
-        <label htmlFor="stats" className="mr-5">
-          Choose a stat:
-        </label>
-        <select
-          id="stats"
-          name="stats"
-          onChange={(e) => changeHandler(e, props.setStatSelection)}
-          className="text-black mr-5"
-        >
-          {stats.map((stat, index) => {
-            return index === 1 ? (
-              <option value={stat} defaultValue className="text-black">
-                {stat}
-              </option>
-            ) : (
-              <option value={stat} className="text-black">
-                {stat}
-              </option>
-            );
-          })}
-        </select>
+
+        <StatListBox setStatSelection={props.setStatSelection}></StatListBox>
         <button type="submit" onClick={clickHandler} className="border px-1">
           Search
         </button>
