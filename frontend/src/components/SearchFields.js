@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import StatListBox from "./headlessUIComponents/ListBox";
+import ToggleSwitch from "./headlessUIComponents/ToggleSwitch";
 
 // Utils
 import { removeAccents } from "../utils/stringCleanup";
@@ -93,19 +94,25 @@ const SearchFields = (props) => {
   return (
     <div>
       <form className="flex flex-row">
-        <input
-          type="text"
-          name="playerName"
-          onChange={(e) => changeHandler(e, props.setPlayerName)}
-          placeholder="Player Name..."
-          value={props.playerName}
-          className="text-black mr-5"
-        ></input>
+        {props.searchOption === "player" ? (
+          <input
+            type="text"
+            name="playerName"
+            onChange={(e) => changeHandler(e, props.setPlayerName)}
+            placeholder="Player Name..."
+            value={props.playerName}
+            className="text-black mr-5"
+          ></input>
+        ) : (
+          <div>Year</div>
+        )}
 
         <StatListBox setStatSelection={props.setStatSelection}></StatListBox>
         <button type="submit" onClick={clickHandler} className="border px-1">
           Search
         </button>
+
+        <ToggleSwitch setSearchOption={props.setSearchOption}></ToggleSwitch>
       </form>
     </div>
   );

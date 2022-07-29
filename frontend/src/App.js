@@ -14,6 +14,7 @@ function App() {
   let [statSelection, setStatSelection] = useState();
   let [response, setResponse] = useState(undefined);
   let [players, setPlayers] = useState([]);
+  let [searchOption, setSearchOption] = useState("Player");
 
   return (
     <div className="flex flex-col justify-center items-center h-screen box-border bg-main-background text-white">
@@ -27,6 +28,8 @@ function App() {
         statSelection={statSelection}
         setResponse={setResponse}
         setPlayers={setPlayers}
+        setSearchOption={setSearchOption}
+        searchOption={searchOption}
       ></SearchFields>
 
       {response === "good" ? (
