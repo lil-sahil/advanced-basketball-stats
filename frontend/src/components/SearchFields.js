@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
-import StatListBox from "./headlessUIComponents/ListBox";
+import ListBox from "./headlessUIComponents/ListBox";
 import ToggleSwitch from "./headlessUIComponents/ToggleSwitch";
 
 // Utils
@@ -8,6 +8,7 @@ import { removeAccents } from "../utils/stringCleanup";
 
 // Configuration files
 import { stats } from "../config/statConfig";
+import { years } from "../config/yearConfig";
 
 const SearchFields = (props) => {
   // State to determine if the user sent a bad request.
@@ -104,10 +105,10 @@ const SearchFields = (props) => {
             className="text-black mr-5"
           ></input>
         ) : (
-          <div>Year</div>
+          <ListBox data={years} setData={props.setYearSelection}></ListBox>
         )}
 
-        <StatListBox setStatSelection={props.setStatSelection}></StatListBox>
+        <ListBox setData={props.setStatSelection} data={stats}></ListBox>
         <button type="submit" onClick={clickHandler} className="border px-1">
           Search
         </button>

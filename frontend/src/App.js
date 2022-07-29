@@ -9,11 +9,18 @@ import PlayerList from "./components/PlayerList";
 import { useState } from "react";
 
 function App() {
+  // States for search by player name
   let [playerName, setPlayerName] = useState();
   let [playerData, setPlayerData] = useState([]);
+  let [players, setPlayers] = useState([]);
+
+  // States for search by Year
+  let [yearSelection, setYearSelection] = useState("All");
+  let [yearData, setYearData] = useState([]);
+
+  // States for both player and year search
   let [statSelection, setStatSelection] = useState();
   let [response, setResponse] = useState(undefined);
-  let [players, setPlayers] = useState([]);
   let [searchOption, setSearchOption] = useState("Player");
 
   return (
@@ -30,6 +37,7 @@ function App() {
         setPlayers={setPlayers}
         setSearchOption={setSearchOption}
         searchOption={searchOption}
+        setYearSelection={setYearSelection}
       ></SearchFields>
 
       {response === "good" ? (

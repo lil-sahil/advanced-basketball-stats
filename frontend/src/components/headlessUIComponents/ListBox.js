@@ -3,13 +3,11 @@ import { Listbox, Transition } from "@headlessui/react";
 import { FaCheck } from "react-icons/fa";
 import { HiOutlineSelector } from "react-icons/hi";
 
-import { stats } from "../../config/statConfig";
-
-export default function StatListBox(props) {
-  const [selected, setSelected] = useState(stats[0]);
+export default function ListBox(props) {
+  const [selected, setSelected] = useState(props.data[0]);
 
   useEffect(() => {
-    props.setStatSelection(selected);
+    props.setData(selected);
   }, [selected]);
 
   return (
@@ -32,15 +30,15 @@ export default function StatListBox(props) {
             leaveTo="opacity-0"
           >
             <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-              {stats.map((stat, statIdx) => (
+              {props.data.map((val, idx) => (
                 <Listbox.Option
-                  key={statIdx}
+                  key={idx}
                   className={({ active }) =>
                     `relative cursor-default select-none py-2 pl-10 pr-4 ${
                       active ? "bg-amber-100 text-amber-900" : "text-gray-900"
                     }`
                   }
-                  value={stat}
+                  value={val}
                 >
                   {({ selected }) => (
                     <>
@@ -49,7 +47,7 @@ export default function StatListBox(props) {
                           selected ? "font-medium" : "font-normal"
                         }`}
                       >
-                        {stat}
+                        {val}
                       </span>
                       {selected ? (
                         <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
