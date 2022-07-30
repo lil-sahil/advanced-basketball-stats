@@ -15,10 +15,6 @@ const removeNanVals = (array, stat) => {
   return array;
 };
 
-// const removePlayers = (array) => {
-
-// }
-
 const percentileRank = (data, stat, percentile) => {
   // let statdata = data.map((item) => {
   //   return parseFloat(item[stat]);

@@ -11,8 +11,6 @@ import { stats } from "../config/statConfig";
 import { years } from "../config/yearConfig";
 
 const SearchFields = (props) => {
-  // State to determine if the user sent a bad request.
-
   const changeHandler = (e, stateToUpdate) => {
     let val = removeAccents(e.target.value);
     stateToUpdate(val);
@@ -87,6 +85,42 @@ const SearchFields = (props) => {
     }
   };
 
+  const fetchYearlyData = async (year) => {
+    let response = await fetch(
+      `http://localhost:5000/api/yearly_data/${year}/${props.statSelection}`,
+      {
+        mode: "cors",
+      }
+    );
+    let data = await response.json();
+
+    return data;
+  };
+
+  const clickHandlerYear = async (e) => {
+    props.setResponse(undefined);
+    e.preventDefault();
+    props.setYearData([]);
+
+    let yearsToFetch = [];
+    let yearlyData = [];
+
+    if (props.yearSelection === "All") {
+      yearsToFetch = years.filter((item) => item !== "All");
+
+      for (let year of yearsToFetch) {
+        let response = await fetchYearlyData(year);
+        yearlyData.push(response);
+        console.log(response);
+      }
+
+      props.setYearData(yearlyData);
+    } else {
+      let response = await fetchYearlyData(props.yearSelection);
+      props.setYearData(response);
+    }
+  };
+
   // UseEffect hook will run on initial render to show the data for the mp_per_g
   useEffect(() => {
     props.setStatSelection("mp_per_g");
@@ -95,7 +129,7 @@ const SearchFields = (props) => {
   return (
     <div>
       <form className="flex flex-row">
-        {props.searchOption === "player" ? (
+        {props.searchOption === "Player" ? (
           <input
             type="text"
             name="playerName"
@@ -109,7 +143,13 @@ const SearchFields = (props) => {
         )}
 
         <ListBox setData={props.setStatSelection} data={stats}></ListBox>
-        <button type="submit" onClick={clickHandler} className="border px-1">
+        <button
+          type="submit"
+          onClick={
+            props.searchOption === "Player" ? clickHandler : clickHandlerYear
+          }
+          className="border px-1"
+        >
           Search
         </button>
 

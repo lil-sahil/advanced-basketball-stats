@@ -6,9 +6,9 @@ export default function ToggleSwitch(props) {
 
   useEffect(() => {
     if (searchPlayer === true) {
-      props.setSearchOption("player");
+      props.setSearchOption("Player");
     } else {
-      props.setSearchOption("year");
+      props.setSearchOption("Year");
     }
 
     console.log(searchPlayer);

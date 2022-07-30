@@ -5,6 +5,7 @@ import SearchFields from "./components/SearchFields";
 import SidePlayerBar from "./components/SidePlayerBar";
 import BadRequest from "./components/BadRequest";
 import PlayerList from "./components/PlayerList";
+import YearDataChart from "./components/YearDataChart";
 
 import { useState } from "react";
 
@@ -38,6 +39,8 @@ function App() {
         setSearchOption={setSearchOption}
         searchOption={searchOption}
         setYearSelection={setYearSelection}
+        yearSelection={yearSelection}
+        setYearData={setYearData}
       ></SearchFields>
 
       {response === "good" ? (
@@ -54,8 +57,13 @@ function App() {
       <div className="flex w-screen ">
         {response === "Not valid" || response === undefined ? (
           <BadRequest></BadRequest>
-        ) : (
+        ) : searchOption === "Player" ? (
           <Chart playerData={playerData} statSelection={statSelection}></Chart>
+        ) : (
+          <YearDataChart
+            yearSelection={yearSelection}
+            statSelection={statSelection}
+          ></YearDataChart>
         )}
 
         {response === "Not valid" || response === undefined ? (
