@@ -9,8 +9,6 @@ const getYearlyData = async (req, res) => {
   const yearlyData = await yearlyModel(req.params.year).find(
     {},
     {
-      [stat]: 1,
-      player: 1,
       _id: 0,
     }
   );
