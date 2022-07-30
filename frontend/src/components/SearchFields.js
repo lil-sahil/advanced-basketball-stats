@@ -139,10 +139,19 @@ const SearchFields = (props) => {
             className="text-black mr-5"
           ></input>
         ) : (
-          <ListBox data={years} setData={props.setYearSelection}></ListBox>
+          <ListBox
+            data={years}
+            setData={props.setYearSelection}
+            setResponse={props.setResponse}
+            clear={true}
+          ></ListBox>
         )}
 
-        <ListBox setData={props.setStatSelection} data={stats}></ListBox>
+        <ListBox
+          setData={props.setStatSelection}
+          data={stats}
+          clear={false}
+        ></ListBox>
         <button
           type="submit"
           onClick={

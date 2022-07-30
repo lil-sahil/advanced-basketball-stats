@@ -19,7 +19,7 @@ import {
   
   import { fetchGeneralData } from "../utils/fetchGeneralData";
 
-import { years } from "../config/yearConfig";
+  import { years } from "../config/yearConfig";
 
   
   const YearDataChart = (props) => {
@@ -34,19 +34,6 @@ import { years } from "../config/yearConfig";
       Legend
     );
 
-    // Props needed
-    // yearSelection
-    // Stat Selection
-
-
-    // Labels
-    const labels = (() => {
-      console.log(props.data)
-        return props.yearSelection === "All" ? years.filter(item => item !== "All") : props.data.map(item => item.player) 
-    })() 
-    
-    
-  
     const options = {
       responsive: true,
       plugins: {
@@ -73,9 +60,15 @@ import { years } from "../config/yearConfig";
       },
     };
     
-
     let [graphData, setGraphData] = useState([]);
     let [topPlayerImages, setTopPlayerImages] = useState([]);
+
+    // Labels
+    const labels = (() => {
+      console.log('Labels Ran')
+        return props.yearSelection === "All" ? years.filter(item => item !== "All") : props.data.map(item => item.player) 
+    })() 
+    
 
     const getTopPlayersImages = async (labels) => {
       let images = await Promise.all(
@@ -116,8 +109,14 @@ import { years } from "../config/yearConfig";
           }
           setGraphData(percentileDataArray);
         };
-        getData([100, 50]);
+
+        if (props.yearSelection === 'All'){
+
+          getData([100, 50]);
+        }
+
       }, [props.statSelection, props.yearData]);
+
 
 
       function sleep(ms) {
@@ -142,13 +141,15 @@ import { years } from "../config/yearConfig";
       labels,
       datasets: [
         {
+          fill:false,
           label: "Dataset 1",
           data: props.data.map((item) =>
             
             parseFloat(item[props.statSelection])
           ),
-          borderColor: "rgb(255, 99, 132)",
+          // borderColor: "rgb(255, 99, 132)",
           backgroundColor: "rgba(255, 99, 132, 0.5)",
+          // pointStyle: topPlayerImages
         },
         {
           fill: false,

@@ -7,6 +7,10 @@ export default function ListBox(props) {
   const [selected, setSelected] = useState(props.data[0]);
 
   useEffect(() => {
+    // clear the graph
+    if (props.clear) {
+      props.setResponse(undefined);
+    }
     props.setData(selected);
   }, [selected]);
 
