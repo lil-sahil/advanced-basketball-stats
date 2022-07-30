@@ -63,16 +63,19 @@ function App() {
           <YearDataChart
             yearSelection={yearSelection}
             statSelection={statSelection}
+            data={yearData}
           ></YearDataChart>
         )}
 
         {response === "Not valid" || response === undefined ? (
           <></>
-        ) : (
+        ) : searchOption === "Player" ? (
           <SidePlayerBar
             playerName={playerName}
             playerData={playerData}
           ></SidePlayerBar>
+        ) : (
+          <></>
         )}
       </div>
     </div>

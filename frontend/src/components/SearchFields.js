@@ -93,6 +93,7 @@ const SearchFields = (props) => {
       }
     );
     let data = await response.json();
+    props.setResponse("good");
 
     return data;
   };
@@ -100,8 +101,6 @@ const SearchFields = (props) => {
   const clickHandlerYear = async (e) => {
     props.setResponse(undefined);
     e.preventDefault();
-    props.setYearData([]);
-
     let yearsToFetch = [];
     let yearlyData = [];
 
@@ -111,7 +110,6 @@ const SearchFields = (props) => {
       for (let year of yearsToFetch) {
         let response = await fetchYearlyData(year);
         yearlyData.push(response);
-        console.log(response);
       }
 
       props.setYearData(yearlyData);
@@ -119,6 +117,8 @@ const SearchFields = (props) => {
       let response = await fetchYearlyData(props.yearSelection);
       props.setYearData(response);
     }
+
+    return 1;
   };
 
   // UseEffect hook will run on initial render to show the data for the mp_per_g
