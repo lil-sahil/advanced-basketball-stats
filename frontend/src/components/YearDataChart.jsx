@@ -65,7 +65,6 @@ import {
 
     // Labels
     const labels = (() => {
-      console.log('Labels Ran')
         return props.yearSelection === "All" ? years.filter(item => item !== "All") : props.data.map(item => item.player) 
     })() 
     

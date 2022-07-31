@@ -8,6 +8,7 @@ import PlayerList from "./components/PlayerList";
 import YearDataChart from "./components/YearDataChart";
 
 import { useState } from "react";
+import SideBarLeaders from "./components/SideBarLeaders";
 
 function App() {
   // States for search by player name
@@ -75,7 +76,11 @@ function App() {
             playerData={playerData}
           ></SidePlayerBar>
         ) : (
-          <></>
+          <SideBarLeaders
+            yearData={yearData}
+            statSelection={statSelection}
+            yearSelection={yearSelection}
+          ></SideBarLeaders>
         )}
       </div>
     </div>
