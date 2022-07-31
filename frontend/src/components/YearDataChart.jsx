@@ -135,52 +135,44 @@ import {
         }
       }, [graphData]);
 
+
+    let datasetsIndividualYear = [
+      {
+        fill: false,
+        label: "Players",
+        data: props.data.map(item => parseFloat(item[props.statSelection])),
+        backgroundColor: "rgba(255, 99, 132, 0.5)",
+      }
+    ]
+
+
+    let datasetAllYears = [
+      // 100th percentile
+      {
+        fill: false,
+        backgroundColor: "rgba(53, 162, 235, 0.5)",
+        label: "Leaders",
+        data: graphData[0]?.map((item) => item[props.statSelection]),
+        pointStyle: topPlayerImages,
+
+      },
+      
+      // 50th percentile
+      {
+        fill: false,
+        backgroundColor: "rgba(53, 162, 235, 0.5)",
+        label: "50th Percentile",
+        data: graphData[1]?.map((item) => item[props.statSelection]),
+      },
+    ]
+
   
   
     const data = {
       labels,
-      datasets: [
-        {
-          fill:false,
-          label: "Dataset 1",
-          data: props.data.map((item) =>
-            
-            parseFloat(item[props.statSelection])
-          ),
-          // borderColor: "rgb(255, 99, 132)",
-          backgroundColor: "rgba(255, 99, 132, 0.5)",
-          // pointStyle: topPlayerImages
-        },
-        {
-          fill: false,
-          backgroundColor: "rgba(53, 162, 235, 0.5)",
-          label: "Leaders",
-          data: graphData[0]?.map((item) => item[props.statSelection]),
-          pointStyle: topPlayerImages,
-
-        },
-        {
-          fill: false,
-          label: "50th percentile",
-          data: graphData[1]?.map((item) => item[props.statSelection]),
-          borderColor: "rgb(255, 99, 132)",
-          backgroundColor: "rgba(255, 99, 132, 0.5)"
-        },
-        // {
-        //   fill: "-1",
-        //   backgroundColor: "rgba(53, 162, 235, 0.5)",
-        //   label: "75th percentile",
-        //   data: graphData[2]?.map((item) => item[props.statSelection]),
-        // },
-        // {
-        //   fill: "-1",
-        //   backgroundColor: "rgba(10, 162, 235, 0.5)",
-        //   label: "100th percentile",
-        //   data: graphData[3]?.map((item) => item[props.statSelection]),
-        //   playerName: graphData[3]?.map((item) => item.player),
-        //   pointStyle: topPlayerImages,
-        // },
-      ],
+      datasets: (() => {
+        return props.yearSelection === "All" ? datasetAllYears : datasetsIndividualYear 
+      })()
     };
   
     return (
