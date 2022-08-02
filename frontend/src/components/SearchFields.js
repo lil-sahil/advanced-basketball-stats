@@ -100,6 +100,7 @@ const SearchFields = (props) => {
 
   const clickHandlerYear = async (e) => {
     props.setResponse(undefined);
+    props.setYearData([]);
     e.preventDefault();
     let yearsToFetch = [];
     let yearlyData = [];
