@@ -11,7 +11,12 @@ export default function ListBox(props) {
     if (props.clear) {
       props.setResponse(undefined);
     }
-    props.setData(selected);
+
+    if (props.callBackFunc === undefined) {
+      props.setData(selected);
+    } else {
+      props.setData(props.callBackFunc(selected));
+    }
   }, [selected]);
 
   return (

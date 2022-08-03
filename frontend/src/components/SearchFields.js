@@ -5,6 +5,7 @@ import ToggleSwitch from "./headlessUIComponents/ToggleSwitch";
 
 // Utils
 import { removeAccents } from "../utils/stringCleanup";
+import { statVerbiage } from "../utils/convertStatsVerbiage";
 
 // Configuration files
 import { stats } from "../config/statConfig";
@@ -150,6 +151,7 @@ const SearchFields = (props) => {
 
         <ListBox
           setData={props.setStatSelection}
+          callBackFunc={statVerbiage}
           data={stats}
           clear={false}
         ></ListBox>
