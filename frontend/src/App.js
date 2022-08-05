@@ -55,7 +55,7 @@ function App() {
         ></PlayerList>
       )}
 
-      <div className="flex w-screen ">
+      <div className="flex w-screen items-center">
         {response === "Not valid" || response === undefined ? (
           <BadRequest></BadRequest>
         ) : searchOption === "Player" ? (
