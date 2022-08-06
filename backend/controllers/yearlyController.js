@@ -7,7 +7,7 @@ const yearlyModel = require("../models/yearlyModels");
 const getYearlyData = async (req, res) => {
   const stat = req.params.stat;
   const yearlyData = await yearlyModel(req.params.year).find(
-    {},
+    { $expr: { $gt: [{ $toDouble: "$mp_per_g" }, 30] } },
     {
       _id: 0,
     }
