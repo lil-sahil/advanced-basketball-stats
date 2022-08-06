@@ -19,6 +19,8 @@ import { getPlayerId } from "../utils/getPlayerId";
 
 import { fetchGeneralData } from "../utils/fetchGeneralData";
 
+import LoadingSpinner from "./LoadingSpinner";
+
 const Chart = (props) => {
   ChartJS.register(
     CategoryScale,
@@ -85,6 +87,7 @@ const Chart = (props) => {
 
   let [graphData, setGraphData] = useState([]);
   let [topPlayerImages, setTopPlayerImages] = useState([]);
+  let [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     let getData = async (arrayOfPercentiles) => {
@@ -102,7 +105,9 @@ const Chart = (props) => {
         percentileDataArray.push(data);
       }
       setGraphData(percentileDataArray);
+      setIsLoading(false);
     };
+    setIsLoading(true);
     getData([25, 50, 75, 100]);
   }, [props.statSelection, props.playerData]);
 
@@ -116,8 +121,10 @@ const Chart = (props) => {
       let images = await getTopPlayersImages(labels);
       await sleep(2000);
       setTopPlayerImages(images);
+      setIsLoading(false);
     };
     if (graphData[3]) {
+      setIsLoading(true);
       updateImages();
     }
   }, [graphData]);
@@ -162,9 +169,15 @@ const Chart = (props) => {
   };
 
   return (
-    <div id="chart" className="h-4/5 w-full">
-      <Line options={options} data={data} />
-    </div>
+    <>
+      {isLoading === true ? (
+        <LoadingSpinner></LoadingSpinner>
+      ) : (
+        <div id="chart" className="h-4/5 w-full">
+          <Line options={options} data={data} />
+        </div>
+      )}
+    </>
   );
 };
 

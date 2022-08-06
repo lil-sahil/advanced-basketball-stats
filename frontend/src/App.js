@@ -12,7 +12,7 @@ import SideBarLeaders from "./components/SideBarLeaders";
 
 function App() {
   // States for search by player name
-  let [playerName, setPlayerName] = useState();
+  let [playerName, setPlayerName] = useState("Michael Jordan");
   let [playerData, setPlayerData] = useState([]);
   let [players, setPlayers] = useState([]);
 

@@ -1,9 +1,12 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import PlayerRankEntry from './PlayerRankEntry'
+import LoadingSpinner from './LoadingSpinner'
 
 const SideBarLeaders = (props) => {
     let [players, setPlayers] = useState([])
+    let [isloading, setIsloading] = useState(true)
+
 
 
     const sortObject = (arr) => {
@@ -33,7 +36,6 @@ const SideBarLeaders = (props) => {
                 }))
                 year += 1
             }
-
             return sortObject(breakObject(topPlayers))
             
         }else {
@@ -42,22 +44,31 @@ const SideBarLeaders = (props) => {
     }
 
 
+
     useEffect(() => {
+        setIsloading(true)
         setPlayers(getTopPlayers())
+        setIsloading(false)
+
     }, [props.yearData, props.statSelection])
 
 
   return (
-    <div className="order-first flex-shrink-0 w-96 mx-2 my-2 py-6 px-4 border-2 rounded-2xl flex flex-col items-center justify-start text-center">
 
-        <div>
-            Player Rankings
-        </div>
-        
-        
-        <PlayerRankEntry players = {players} statSelection = {props.statSelection} yearSelection = {props.yearSelection}></PlayerRankEntry>
+    <>
+        {isloading === true ? <LoadingSpinner></LoadingSpinner> : (
+            <div className="order-first flex-shrink-0 w-96 mx-2 my-2 py-6 px-4 border-2 rounded-2xl flex flex-col items-center justify-start text-center">
 
-    </div>
+                <div>
+                    Player Rankings
+                </div>
+                
+                
+                <PlayerRankEntry players = {players} statSelection = {props.statSelection} yearSelection = {props.yearSelection}></PlayerRankEntry>
+
+            </div>
+        )}
+    </>
   )
 }
 

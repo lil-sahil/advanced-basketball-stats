@@ -21,6 +21,8 @@ import {
 
   import { years } from "../config/yearConfig";
 
+  import LoadingSpinner from "./LoadingSpinner";
+
   
   const YearDataChart = (props) => {
     ChartJS.register(
@@ -61,7 +63,8 @@ import {
     };
     
     let [graphData, setGraphData] = useState([]);
-    let [topPlayerImages, setTopPlayerImages] = useState([]);
+    let [topPlayerImages, setTopPlayerImages] = useState(null);
+    let [isloading, setIsloading] = useState(false)
 
     // Labels
     const labels = (() => {
@@ -107,10 +110,12 @@ import {
             percentileDataArray.push(data);
           }
           setGraphData(percentileDataArray);
+          setIsloading(true)
+
         };
 
         if (props.yearSelection === 'All'){
-
+          setIsloading(true)
           getData([100, 50]);
         }
 
@@ -124,15 +129,19 @@ import {
 
       useEffect(() => {
         const updateImages = async () => {
-          setTopPlayerImages([]);
+          setTopPlayerImages(null);
           let images = await getTopPlayersImages(labels);
           await sleep(2000);
           setTopPlayerImages(images);
+          setIsloading(false)
         };
         if (graphData[0]) {
+          setIsloading(true)
+
           updateImages();
         }
       }, [graphData]);
+
 
 
     let datasetsIndividualYear = [
@@ -175,9 +184,15 @@ import {
     };
   
     return (
-      <div id="chart" className="h-4/5 w-full">
-        <Line options={options} data={data} />
-      </div>
+
+      <>
+        {(isloading === true ) ? <LoadingSpinner></LoadingSpinner> : 
+          <div id="chart" className="h-4/5 w-full">
+            <Line options={options} data={data} />
+         </div>
+        }
+      
+      </>
     );
   };
   
