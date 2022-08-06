@@ -61,7 +61,7 @@ const SidePlayerBar = (props) => {
         <div className="h-full">
           <img
             src={`https://cdn.nba.com/logos/nba/${teamId}/global/D/logo.svg`}
-            className="h-full"
+            className="h-20"
           ></img>
         </div>
       </div>

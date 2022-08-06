@@ -16,7 +16,7 @@ const PlayerRankEntry = (props) => {
           <th>Rank</th>
           <th>Player</th>
           <th>Value</th>
-          {props.statSelection === "All" ? <th>Year</th> : null}
+          {props.yearSelection === "All" ? <th>Year</th> : null}
         </tr>
 
         {players.map((item, index) => {
@@ -25,7 +25,7 @@ const PlayerRankEntry = (props) => {
               <td>{index + 1}</td>
               <td>{item.player}</td>
               <td>{item[props.statSelection]}</td>
-              {props.statSelection === "All" ? <td>{item.year}</td> : null}
+              {props.yearSelection === "All" ? <td>{item.year}</td> : null}
             </tr>
           );
         })}

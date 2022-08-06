@@ -55,7 +55,7 @@ const SideBarLeaders = (props) => {
         </div>
         
         
-        <PlayerRankEntry players = {players} statSelection = {props.statSelection}></PlayerRankEntry>
+        <PlayerRankEntry players = {players} statSelection = {props.statSelection} yearSelection = {props.yearSelection}></PlayerRankEntry>
 
     </div>
   )
