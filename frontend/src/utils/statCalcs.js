@@ -15,7 +15,7 @@ const removeNanVals = (array, stat) => {
   return array;
 };
 
-const removeDoublePlayerEntries = (array) => {
+export const removeDoublePlayerEntries = (array, stat) => {
   let playersTotalYearlyStats = array.filter((obj) => {
     return obj["team_id"] === "TOT";
   });
@@ -30,18 +30,18 @@ const removeDoublePlayerEntries = (array) => {
 
   let finalArray = removedArray.concat(playersTotalYearlyStats);
 
+  // Remove data where the stat is perfect percentage. Statistically this is very unlikely.
+  // For example someone who shoots three regularly is unlikely to go perfect shooting in the whole year,
+  // unless they only shot a handfull of threes. Since there is no data availaible to check the numebr of
+  // threes the player shot in the year, this is a test to take these values out.
+  finalArray = finalArray.filter((obj) => obj[stat] !== "1.000");
+
   return finalArray;
 };
 
 const percentileRank = (data, stat, percentile) => {
   data = removeNanVals(data, stat);
-  data = removeDoublePlayerEntries(data);
-
-  // Remove data where the stat is perfect percentage. Statistically this is very unlikely.
-  // For example someone who shoots three regularly is unlikely to go perfect shooting in the whole year,
-  // unless they only shot a handfull of threes. Since there is no data availaible to check the numebr of
-  // threes the player shot in the year, this is a test to take these values out.
-  data = data.filter((obj) => obj[stat] !== "1.000");
+  data = removeDoublePlayerEntries(data, stat);
 
   let sortedArray = data.sort((a, b) => a[stat] - b[stat]);
   let rank = Math.floor((percentile / 100) * sortedArray.length);

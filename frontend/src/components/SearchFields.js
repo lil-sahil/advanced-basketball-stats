@@ -6,6 +6,7 @@ import ToggleSwitch from "./headlessUIComponents/ToggleSwitch";
 // Utils
 import { removeAccents } from "../utils/stringCleanup";
 import { statVerbiage } from "../utils/convertStatsVerbiage";
+import { removeDoublePlayerEntries } from "../utils/statCalcs";
 
 // Configuration files
 import { stats } from "../config/statConfig";
@@ -94,6 +95,7 @@ const SearchFields = (props) => {
       }
     );
     let data = await response.json();
+    data = removeDoublePlayerEntries(data, props.statSelection);
     props.setResponse("good");
 
     return data;
