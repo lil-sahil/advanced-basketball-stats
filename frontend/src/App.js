@@ -46,7 +46,7 @@ function App() {
 
       {response === "good" ? (
         <></>
-      ) : (
+      ) : searchOption === "Player" ? (
         <PlayerList
           players={players}
           setPlayerName={setPlayerName}
@@ -54,6 +54,8 @@ function App() {
           setResponse={setResponse}
           setPlayers={setPlayers}
         ></PlayerList>
+      ) : (
+        <></>
       )}
 
       <div className="flex w-screen items-center">

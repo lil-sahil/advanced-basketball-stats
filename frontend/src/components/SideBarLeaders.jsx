@@ -37,19 +37,27 @@ const SideBarLeaders = (props) => {
                 }))
                 year += 1
             }
+            console.log("IAMHERE")
+            setIsloading(false)
             return sortObject(breakObject(topPlayers))
             
         }else {
+            setIsloading(false)
+
             return sortObject(props.yearData)
         }
+
     }
 
 
 
     useEffect(() => {
         setIsloading(true)
-        setPlayers(getTopPlayers())
-        setIsloading(false)
+
+        if(props.yearData.length != 0){
+
+            setPlayers(getTopPlayers())
+        }
 
     }, [props.yearData, props.statSelection])
 
