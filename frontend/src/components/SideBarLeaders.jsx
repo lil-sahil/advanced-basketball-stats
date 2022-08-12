@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import PlayerRankEntry from './PlayerRankEntry'
 import LoadingSpinner from './LoadingSpinner'
 
+
 const SideBarLeaders = (props) => {
     let [players, setPlayers] = useState([])
     let [isloading, setIsloading] = useState(true)

@@ -14,6 +14,7 @@ const PlayerList = (props) => {
 
     props.setPlayerData(data);
     props.setResponse("good");
+    props.setPlayers([]);
     return 1;
   };
 

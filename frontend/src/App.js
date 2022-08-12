@@ -52,6 +52,7 @@ function App() {
           setPlayerName={setPlayerName}
           setPlayerData={setPlayerData}
           setResponse={setResponse}
+          setPlayers={setPlayers}
         ></PlayerList>
       )}
 
