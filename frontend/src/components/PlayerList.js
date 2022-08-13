@@ -19,11 +19,18 @@ const PlayerList = (props) => {
   };
 
   return (
-    <>
+    <div className="flex flex-row max-w-xl flex-wrap mt-10">
       {props.players.map((playerName) => {
-        return <div onClick={handleClick}>{playerName}</div>;
+        return (
+          <div
+            onClick={handleClick}
+            className="border-2 rounded border-main-gold bg-main-basketball-orange hover:bg-main-gold hover:border-main-basketball-orange hover:cursor-pointer p-2 mr-2 mb-2 "
+          >
+            {playerName}
+          </div>
+        );
       })}
-    </>
+    </div>
   );
 };
 

@@ -132,7 +132,7 @@ const SearchFields = (props) => {
 
   return (
     <div>
-      <form className="flex flex-row">
+      <form className="flex flex-row max-w-xl">
         {props.searchOption === "Player" ? (
           <input
             type="text"

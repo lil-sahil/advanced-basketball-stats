@@ -10,6 +10,10 @@ module.exports = {
       backgroundImage: {
         "main-background": "url('./assets/dark-bg.jpg')",
       },
+      colors: {
+        "main-gold": "#FFD700",
+        "main-basketball-orange": "#F88158",
+      },
     },
   },
   plugins: [],
