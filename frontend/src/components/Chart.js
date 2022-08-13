@@ -33,6 +33,10 @@ const Chart = (props) => {
     Legend
   );
 
+  let [graphData, setGraphData] = useState([]);
+  let [topPlayerImages, setTopPlayerImages] = useState([]);
+  let [isLoading, setIsLoading] = useState(false);
+
   const getTopPlayersImages = async (labels) => {
     let images = await Promise.all(
       labels.map(async (year, index) => {
@@ -57,6 +61,37 @@ const Chart = (props) => {
 
   const options = {
     responsive: true,
+    scales: {
+      x: {
+        grid: {
+          color: "rgba(247, 245, 245, 0.3)",
+          borderColor: "#ffffff",
+          borderWidth: 3,
+          z: -1,
+        },
+        ticks: {
+          color: "#ffffff",
+          font: {
+            size: 14,
+          },
+        },
+      },
+      y: {
+        grid: {
+          color: "rgba(247, 245, 245, 0.3)",
+          borderColor: "#ffffff",
+          borderWidth: 3,
+          z: -1,
+        },
+        ticks: {
+          color: "#ffffff",
+          font: {
+            size: 14,
+          },
+        },
+        grace: "10%",
+      },
+    },
     plugins: {
       tooltip: {
         callbacks: {
@@ -72,10 +107,17 @@ const Chart = (props) => {
       },
       legend: {
         position: "top",
+        labels: {
+          color: "#ffffff",
+        },
       },
       title: {
-        display: true,
-        text: "Chart.js Line Chart",
+        display: false,
+        text: "Player Stats",
+      },
+
+      filler: {
+        propogate: false,
       },
     },
     onClick: (e, activeEls) => {
@@ -110,10 +152,6 @@ const Chart = (props) => {
   const labels = props.playerData.map((item) => {
     return item.Year;
   });
-
-  let [graphData, setGraphData] = useState([]);
-  let [topPlayerImages, setTopPlayerImages] = useState([]);
-  let [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     let getData = async (arrayOfPercentiles) => {
@@ -167,25 +205,25 @@ const Chart = (props) => {
         backgroundColor: "rgba(255, 99, 132, 0.5)",
       },
       {
-        fill: true,
-        backgroundColor: "rgba(53, 162, 235, 0.5)",
-        label: "25th percentile",
+        fill: "origin",
+        backgroundColor: "rgba(212, 32, 25, 0.5)",
+        label: "< 25th percentile",
         data: graphData[0]?.map((item) => item[props.statSelection]),
       },
       {
-        fill: "-1",
-        label: "50th percentile",
+        fill: "1",
+        backgroundColor: "rgba(250, 213, 80, 0.5)",
+        label: "< 50th percentile",
         data: graphData[1]?.map((item) => item[props.statSelection]),
       },
       {
-        fill: "-1",
-        backgroundColor: "rgba(53, 162, 235, 0.5)",
-        label: "75th percentile",
+        fill: "-2",
+        backgroundColor: "rgba(5, 135, 18, 0.5)",
+        label: "< 75th percentile",
         data: graphData[2]?.map((item) => item[props.statSelection]),
       },
       {
-        fill: "-1",
-        backgroundColor: "rgba(10, 162, 235, 0.5)",
+        borderColor: "rgba(255,215,0, 0.4)",
         label: "100th percentile",
         data: graphData[3]?.map((item) => item[props.statSelection]),
         playerName: graphData[3]?.map((item) => item.player),
