@@ -64,8 +64,7 @@ const Chart = (props) => {
             let label = context.dataset.label || "";
 
             if (context.dataset.label === "100th percentile") {
-              label += ": ";
-              label += context.dataset.playerName[context.dataIndex];
+              label = context.dataset.playerName[context.dataIndex];
             }
             return label;
           },
@@ -78,6 +77,33 @@ const Chart = (props) => {
         display: true,
         text: "Chart.js Line Chart",
       },
+    },
+    onClick: (e, activeEls) => {
+      let datasetIndex = activeEls[0].datasetIndex;
+
+      if (e.chart._metasets[datasetIndex].label !== "100th percentile") {
+        return 1;
+      }
+      let playerIndex = activeEls[0].index;
+      let player =
+        e.chart._metasets[datasetIndex]._dataset.playerName[playerIndex];
+
+      const fetchData = async (searchString) => {
+        let response = await fetch(
+          `http://localhost:5000/api/${searchString}`,
+          {
+            mode: "cors",
+          }
+        );
+        let data = await response.json();
+
+        props.setPlayerData(data);
+        props.setPlayerName(data[0].Data[0].player);
+        props.setResponse("good");
+        return 1;
+      };
+
+      fetchData(player);
     },
   };
 
@@ -173,7 +199,7 @@ const Chart = (props) => {
       {isLoading === true ? (
         <LoadingSpinner></LoadingSpinner>
       ) : (
-        <div id="chart" className="h-4/5 w-full">
+        <div id="chart" className="w-full">
           <Line options={options} data={data} />
         </div>
       )}

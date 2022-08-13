@@ -63,7 +63,13 @@ function App() {
         {response === "Not valid" || response === undefined ? (
           <BadRequest></BadRequest>
         ) : searchOption === "Player" ? (
-          <Chart playerData={playerData} statSelection={statSelection}></Chart>
+          <Chart
+            playerData={playerData}
+            setPlayerData={setPlayerData}
+            setResponse={setResponse}
+            statSelection={statSelection}
+            setPlayerName={setPlayerName}
+          ></Chart>
         ) : (
           <YearDataChart
             yearSelection={yearSelection}
