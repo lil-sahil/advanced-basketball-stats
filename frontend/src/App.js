@@ -37,6 +37,7 @@ function App() {
         statSelection={statSelection}
         setResponse={setResponse}
         setPlayers={setPlayers}
+        players={players}
         setSearchOption={setSearchOption}
         searchOption={searchOption}
         setYearSelection={setYearSelection}

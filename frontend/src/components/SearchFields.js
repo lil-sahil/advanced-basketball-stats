@@ -140,7 +140,9 @@ const SearchFields = (props) => {
             onChange={(e) => changeHandler(e, props.setPlayerName)}
             placeholder="Player Name..."
             value={props.playerName}
-            className="text-black mr-5"
+            className={`text-black mr-5 ${
+              props.players.length > 1 ? "border-4 border-red-200" : ""
+            }`}
           ></input>
         ) : (
           <ListBox
