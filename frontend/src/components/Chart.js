@@ -75,6 +75,15 @@ const Chart = (props) => {
             size: 14,
           },
         },
+        title: {
+          display: true,
+          text: "Year",
+          color: "#ffffff",
+          font: {
+            size: 14,
+            weight: "bold",
+          },
+        },
       },
       y: {
         grid: {
@@ -90,6 +99,15 @@ const Chart = (props) => {
           },
         },
         grace: "10%",
+        title: {
+          display: true,
+          text: props.statSelection,
+          color: "#ffffff",
+          font: {
+            size: 14,
+            weight: "bold",
+          },
+        },
       },
     },
     plugins: {
@@ -100,6 +118,7 @@ const Chart = (props) => {
 
             if (context.dataset.label === "100th percentile") {
               label = context.dataset.playerName[context.dataIndex];
+              label += ` - ${context.dataset.data[context.dataIndex]}`;
             }
             return label;
           },
@@ -197,7 +216,7 @@ const Chart = (props) => {
     labels,
     datasets: [
       {
-        label: "Dataset 1",
+        label: props.playerName,
         data: props.playerData.map((item) =>
           parseFloat(item.Data[0][props.statSelection])
         ),
@@ -237,7 +256,7 @@ const Chart = (props) => {
       {isLoading === true ? (
         <LoadingSpinner></LoadingSpinner>
       ) : (
-        <div id="chart" className="w-full">
+        <div id="chart" className="w-8/12 ml-20 h-full">
           <Line options={options} data={data} />
         </div>
       )}

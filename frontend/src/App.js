@@ -26,7 +26,7 @@ function App() {
   let [searchOption, setSearchOption] = useState("Player");
 
   return (
-    <div className="flex flex-col justify-center items-center h-screen box-border bg-main-background text-white">
+    <div className="flex flex-col justify-center items-center h-screen box-border bg-main-background text-white overflow-hidden">
       <Title></Title>
 
       <SearchFields
@@ -59,7 +59,7 @@ function App() {
         <></>
       )}
 
-      <div className="flex w-screen items-center">
+      <div className="flex w-screen items-center p-12">
         {response === "Not valid" || response === undefined ? (
           <BadRequest></BadRequest>
         ) : searchOption === "Player" ? (
@@ -69,6 +69,7 @@ function App() {
             setResponse={setResponse}
             statSelection={statSelection}
             setPlayerName={setPlayerName}
+            playerName={playerName}
           ></Chart>
         ) : (
           <YearDataChart
