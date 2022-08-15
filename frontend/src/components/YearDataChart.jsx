@@ -36,17 +36,77 @@ import {
       Legend
     );
 
+    let [graphData, setGraphData] = useState([]);
+    let [topPlayerImages, setTopPlayerImages] = useState(null);
+    let [isloading, setIsloading] = useState(false)
+
     const options = {
       responsive: true,
+      scales: {
+        x: {
+          grid: {
+            color: "rgba(247, 245, 245, 0.3)",
+            borderColor: "#ffffff",
+            borderWidth: 3,
+            z: -1,
+          },
+          ticks: {
+            display: () => {
+              return props.yearSelection === "All" ? true : false
+            },
+            color: "#ffffff",
+            font: {
+              size: 14,
+            },
+          },
+          title: {
+            display: true,
+            text: () => {
+              return props.yearSelection === "All" ? "Year" : "Player"
+            },
+            color: "#ffffff",
+            font: {
+              size: 14,
+              weight: "bold",
+            },
+          },
+        },
+        y: {
+          grid: {
+            color: "rgba(247, 245, 245, 0.3)",
+            borderColor: "#ffffff",
+            borderWidth: 3,
+            z: -1,
+          },
+          ticks: {
+            color: "#ffffff",
+            font: {
+              size: 14,
+            },
+          },
+          grace: "10%",
+          title: {
+            display: true,
+            text: props.statSelection,
+            color: "#ffffff",
+            font: {
+              size: 14,
+              weight: "bold",
+            },
+          },
+        },
+      },
       plugins: {
         tooltip: {
           callbacks: {
             label: function (context) {
-              let label = context.dataset.label || "";
-  
-              if (context.dataset.label === "100th percentile") {
-                label += ": ";
-                label += context.dataset.playerName[context.dataIndex];
+              console.log(context)
+              let label
+
+              if (props.yearSelection === "All"){
+                label =  graphData[0][context.dataIndex].player
+              }else {
+                label = context.raw;
               }
               return label;
             },
@@ -62,9 +122,7 @@ import {
       },
     };
     
-    let [graphData, setGraphData] = useState([]);
-    let [topPlayerImages, setTopPlayerImages] = useState(null);
-    let [isloading, setIsloading] = useState(false)
+  
 
     // Labels
     const labels = (() => {
@@ -149,7 +207,7 @@ import {
         fill: false,
         label: "Players",
         data: props.data.map(item => parseFloat(item[props.statSelection])),
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
+        backgroundColor: "rgba(255, 99, 132)",
       }
     ]
 
@@ -187,7 +245,7 @@ import {
 
       <>
         {(isloading === true ) ? <LoadingSpinner></LoadingSpinner> : 
-          <div id="chart" className="h-4/5 w-full">
+          <div id="chart" className="w-8/12 ml-20 h-full">
             <Line options={options} data={data} />
          </div>
         }
