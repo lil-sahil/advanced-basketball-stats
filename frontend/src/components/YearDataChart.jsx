@@ -100,26 +100,38 @@ import {
         tooltip: {
           callbacks: {
             label: function (context) {
-              console.log(context)
-              let label
 
-              if (props.yearSelection === "All"){
-                label =  graphData[0][context.dataIndex].player
+              let label
+              if (context.dataset.label === "Leaders"){
+
+  
+                if (props.yearSelection === "All"){
+                  label =  `${graphData[0][context.dataIndex].player} - ${context.dataset.data[context.dataIndex]}`
+
+                }else {
+                  label = context.raw;
+                }
               }else {
-                label = context.raw;
+                label =  context.dataset.data[context.dataIndex]
               }
+
               return label;
+
             },
           },
         },
         legend: {
           position: "top",
+          labels: {
+            color: "#ffffff",
+          },
         },
         title: {
-          display: true,
-          text: "Chart.js Line Chart",
+          display: false,
+          text: "Yearly Stats",
         },
       },
+      
     };
     
   
@@ -216,7 +228,8 @@ import {
       // 100th percentile
       {
         fill: false,
-        backgroundColor: "rgba(53, 162, 235, 0.5)",
+        borderColor: "rgba(255,215,0, 0.4)",
+        // backgroundColor: "rgba(53, 162, 235, 0.5)",
         label: "Leaders",
         data: graphData[0]?.map((item) => item[props.statSelection]),
         pointStyle: topPlayerImages,
@@ -226,6 +239,7 @@ import {
       // 50th percentile
       {
         fill: false,
+        borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(53, 162, 235, 0.5)",
         label: "50th Percentile",
         data: graphData[1]?.map((item) => item[props.statSelection]),
