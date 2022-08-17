@@ -76,6 +76,10 @@ function App() {
             yearSelection={yearSelection}
             statSelection={statSelection}
             data={yearData}
+            setPlayerData={setPlayerData}
+            setPlayerName={setPlayerName}
+            setResponse={setResponse}
+            setSearchOption={setSearchOption}
           ></YearDataChart>
         )}
 

@@ -10,8 +10,6 @@ export default function ToggleSwitch(props) {
     } else {
       props.setSearchOption("Year");
     }
-
-    console.log(searchPlayer);
   }, [searchPlayer]);
 
   return (
