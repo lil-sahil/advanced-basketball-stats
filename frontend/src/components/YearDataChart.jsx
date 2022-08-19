@@ -134,48 +134,51 @@ import {
 
       onClick: (e, activeEls, context) => {
 
-      let datasetIndex = activeEls[0].datasetIndex;
-      let playerIndex = activeEls[0].index;
-      let player
+        try {
 
-      
-      try{
-
-        if ( (e.chart._metasets[datasetIndex].label !== "Leaders") & (e.chart._metasets[datasetIndex].label !== "Players") ) {
-          return 1;
-        }
-      }catch{
-        return 1
-      }
-
-
-
-      if (props.yearSelection === "All"){        
-        player =
-          graphData[datasetIndex][playerIndex].player;
-      }else {
-        player = context.tooltip.title[0]
-      }
-
-
-      const fetchData = async (searchString) => {
-        let response = await fetch(
-          `http://localhost:5000/api/${searchString}`,
-          {
-            mode: "cors",
+          let datasetIndex = activeEls[0].datasetIndex;
+          let playerIndex = activeEls[0].index;
+          let player
+  
+          
+          
+  
+          if ( (e.chart._metasets[datasetIndex].label !== "Leaders") & (e.chart._metasets[datasetIndex].label !== "Players") ) {
+            return 1;
           }
-        );
-        let data = await response.json();
-        console.log(data)
-        
-        props.setSearchOption("Player")
-        props.setPlayerData(data);
-        props.setPlayerName(data[0].Data[0].player);
-        props.setResponse("good");
-        return 1;
-      };
-
-      fetchData(player);
+          
+  
+  
+  
+          if (props.yearSelection === "All"){        
+            player =
+              graphData[datasetIndex][playerIndex].player;
+          }else {
+            player = context.tooltip.title[0]
+          }
+  
+  
+          const fetchData = async (searchString) => {
+            let response = await fetch(
+              `http://localhost:5000/api/${searchString}`,
+              {
+                mode: "cors",
+              }
+            );
+            let data = await response.json();
+            
+            props.setSearchOption("Player")
+            props.setPlayerData(data);
+            props.setPlayerName(data[0].Data[0].player);
+            props.setResponse("good");
+            return 1;
+          };
+  
+          fetchData(player);
+        }
+        catch (err) {
+          console.log("No Data Point Selected.")
+        }
         
       },
       
