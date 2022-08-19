@@ -216,7 +216,7 @@ const Chart = (props) => {
     labels,
     datasets: [
       {
-        label: props.playerName,
+        label: props.playerData[0].Data[0].player,
         data: props.playerData.map((item) =>
           parseFloat(item.Data[0][props.statSelection])
         ),
