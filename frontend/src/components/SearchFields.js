@@ -169,7 +169,10 @@ const SearchFields = (props) => {
           Search
         </button>
 
-        <ToggleSwitch setSearchOption={props.setSearchOption}></ToggleSwitch>
+        <ToggleSwitch
+          setSearchOption={props.setSearchOption}
+          searchOption={props.searchOption}
+        ></ToggleSwitch>
       </form>
     </div>
   );

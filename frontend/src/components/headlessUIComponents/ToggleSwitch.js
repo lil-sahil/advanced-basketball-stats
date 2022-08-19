@@ -12,6 +12,14 @@ export default function ToggleSwitch(props) {
     }
   }, [searchPlayer]);
 
+  useEffect(() => {
+    if (props.searchOption === "Player") {
+      setSearchPlayer(true);
+    } else {
+      setSearchPlayer(false);
+    }
+  }, [props.searchOption]);
+
   return (
     <div>
       <Switch

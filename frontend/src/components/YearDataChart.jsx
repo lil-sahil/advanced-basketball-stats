@@ -132,17 +132,31 @@ import {
         },
       },
 
-      onClick: (e, activeEls) => {
+      onClick: (e, activeEls, context) => {
 
       let datasetIndex = activeEls[0].datasetIndex;
+      let playerIndex = activeEls[0].index;
+      let player
 
-      if ( (e.chart._metasets[datasetIndex].label !== "Leaders") & (e.chart._metasets[datasetIndex].label !== "Players") ) {
-        return 1;
+      
+      try{
+
+        if ( (e.chart._metasets[datasetIndex].label !== "Leaders") & (e.chart._metasets[datasetIndex].label !== "Players") ) {
+          return 1;
+        }
+      }catch{
+        return 1
       }
 
-      let playerIndex = activeEls[0].index;
-      let player =
-        graphData[datasetIndex][playerIndex].player;
+
+
+      if (props.yearSelection === "All"){        
+        player =
+          graphData[datasetIndex][playerIndex].player;
+      }else {
+        player = context.tooltip.title[0]
+      }
+
 
       const fetchData = async (searchString) => {
         let response = await fetch(
@@ -154,7 +168,7 @@ import {
         let data = await response.json();
         console.log(data)
         
-        props.setSearchOption("Year")
+        props.setSearchOption("Player")
         props.setPlayerData(data);
         props.setPlayerName(data[0].Data[0].player);
         props.setResponse("good");
