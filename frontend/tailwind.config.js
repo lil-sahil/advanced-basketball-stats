@@ -13,6 +13,8 @@ module.exports = {
       colors: {
         "main-gold": "#FFD700",
         "main-basketball-orange": "#F88158",
+        "main-background-dark": "rgba(18,18,18,255)",
+        "secondary-background-light-dark": "rgba(30,30,30,255)",
       },
     },
   },

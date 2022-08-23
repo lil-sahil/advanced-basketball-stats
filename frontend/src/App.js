@@ -6,6 +6,7 @@ import SidePlayerBar from "./components/SidePlayerBar";
 import BadRequest from "./components/BadRequest";
 import PlayerList from "./components/PlayerList";
 import YearDataChart from "./components/YearDataChart";
+import { BsGithub } from "react-icons/bs";
 
 import { useState } from "react";
 import SideBarLeaders from "./components/SideBarLeaders";
@@ -26,8 +27,11 @@ function App() {
   let [searchOption, setSearchOption] = useState("Player");
 
   return (
-    <div className="flex flex-col justify-center items-center h-screen box-border bg-main-background text-white overflow-hidden">
-      <Title></Title>
+    <div className="flex flex-col justify-start items-center h-screen box-border bg-main-background-dark text-white overflow-hidden">
+      <div className="flex flex-row justify-between items-center border-b-2 w-5/6 h-20">
+        <Title></Title>
+        <BsGithub className="my-8 self-end text-2xl"></BsGithub>
+      </div>
 
       <SearchFields
         setPlayerName={setPlayerName}
