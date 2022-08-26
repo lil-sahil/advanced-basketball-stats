@@ -28,9 +28,9 @@ function App() {
 
   return (
     <div className="flex flex-col justify-start items-center h-screen box-border bg-main-background-dark text-white overflow-hidden">
-      <div className="flex flex-row justify-between items-center border-b-2 w-5/6 h-20">
+      <div className="flex flex-row justify-between items-center border-b-2 w-full h-20">
         <Title></Title>
-        <BsGithub className="my-8 self-end text-2xl"></BsGithub>
+        <BsGithub className="my-8 mr-4 self-end text-2xl"></BsGithub>
       </div>
 
       <SearchFields
