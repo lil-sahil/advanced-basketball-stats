@@ -132,9 +132,9 @@ const SearchFields = (props) => {
 
   return (
     <div className="flex flex-col justify-center items-center">
-      <form className="flex flex-row justify-between items-center bg-secondary-background-light-dark p-4 mt-12">
+      <form className="flex flex-row justify-between items-center bg-secondary-background-light-dark p-4 mt-12 rounded-lg">
         {props.searchOption === "Player" ? (
-          <div className="flex flex-col">
+          <div className="flex flex-col mr-10">
             <div className="mb-2">Player Name:</div>
             <input
               type="text"
@@ -148,7 +148,7 @@ const SearchFields = (props) => {
             ></input>
           </div>
         ) : (
-          <div>
+          <div className="flex flex-col mr-10">
             <div className="mb-2">Year:</div>
             <ListBox
               data={years}
@@ -159,7 +159,7 @@ const SearchFields = (props) => {
           </div>
         )}
 
-        <div className="flex flex-col">
+        <div className="flex flex-col mr-10">
           <div className="mb-2">Stat:</div>
 
           <ListBox
@@ -170,21 +170,43 @@ const SearchFields = (props) => {
           ></ListBox>
         </div>
 
-        <ToggleSwitch
-          setSearchOption={props.setSearchOption}
-          searchOption={props.searchOption}
-        ></ToggleSwitch>
-      </form>
+        <div className="flex flex-col items-center h-full mr-10">
+          <div>
+            <div className="px-10">Search By:</div>
 
-      <button
-        type="submit"
-        onClick={
-          props.searchOption === "Player" ? clickHandler : clickHandlerYear
-        }
-        className="border px-4 py-2 bg-[#2980B9] rounded-md w-min"
-      >
-        Search
-      </button>
+            <div className="flex flex-row justify-between">
+              <div
+                className={`${
+                  props.searchOption === "Year" ? "text-[#2980B9]" : null
+                }`}
+              >
+                Year
+              </div>
+              <div
+                className={`${
+                  props.searchOption === "Player" ? "text-[#2980B9]" : null
+                }`}
+              >
+                Player
+              </div>
+            </div>
+          </div>
+          <ToggleSwitch
+            setSearchOption={props.setSearchOption}
+            searchOption={props.searchOption}
+          ></ToggleSwitch>
+        </div>
+
+        <button
+          type="submit"
+          onClick={
+            props.searchOption === "Player" ? clickHandler : clickHandlerYear
+          }
+          className="border px-4 py-2 bg-[#2980B9] rounded-md w-min"
+        >
+          Search
+        </button>
+      </form>
     </div>
   );
 };
