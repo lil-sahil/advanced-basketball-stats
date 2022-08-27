@@ -131,49 +131,60 @@ const SearchFields = (props) => {
   }, []);
 
   return (
-    <div className="w-full flex flex-row justify-center">
-      <form className="flex flex-row justify-between bg-secondary-background-light-dark p-4 mt-12 w-5/6">
+    <div className="flex flex-col justify-center items-center">
+      <form className="flex flex-row justify-between items-center bg-secondary-background-light-dark p-4 mt-12">
         {props.searchOption === "Player" ? (
-          <input
-            type="text"
-            name="playerName"
-            onChange={(e) => changeHandler(e, props.setPlayerName)}
-            placeholder="Player Name..."
-            value={props.playerName}
-            className={`text-black mr-5 ${
-              props.players.length > 1 ? "border-4 border-red-200" : ""
-            }`}
-          ></input>
+          <div className="flex flex-col">
+            <div className="mb-2">Player Name:</div>
+            <input
+              type="text"
+              name="playerName"
+              onChange={(e) => changeHandler(e, props.setPlayerName)}
+              placeholder="Player Name..."
+              value={props.playerName}
+              className={`text-black text-sm rounded-lg inline-block h-9 w-[288px] ${
+                props.players.length > 1 ? "border-4 border-red-200" : ""
+              }`}
+            ></input>
+          </div>
         ) : (
-          <ListBox
-            data={years}
-            setData={props.setYearSelection}
-            setResponse={props.setResponse}
-            clear={true}
-          ></ListBox>
+          <div>
+            <div className="mb-2">Year:</div>
+            <ListBox
+              data={years}
+              setData={props.setYearSelection}
+              setResponse={props.setResponse}
+              clear={true}
+            ></ListBox>
+          </div>
         )}
 
-        <ListBox
-          setData={props.setStatSelection}
-          callBackFunc={statVerbiage}
-          data={stats}
-          clear={false}
-        ></ListBox>
-        <button
-          type="submit"
-          onClick={
-            props.searchOption === "Player" ? clickHandler : clickHandlerYear
-          }
-          className="border px-1"
-        >
-          Search
-        </button>
+        <div className="flex flex-col">
+          <div className="mb-2">Stat:</div>
+
+          <ListBox
+            setData={props.setStatSelection}
+            callBackFunc={statVerbiage}
+            data={stats}
+            clear={false}
+          ></ListBox>
+        </div>
 
         <ToggleSwitch
           setSearchOption={props.setSearchOption}
           searchOption={props.searchOption}
         ></ToggleSwitch>
       </form>
+
+      <button
+        type="submit"
+        onClick={
+          props.searchOption === "Player" ? clickHandler : clickHandlerYear
+        }
+        className="border px-4 py-2 bg-[#2980B9] rounded-md w-min"
+      >
+        Search
+      </button>
     </div>
   );
 };
