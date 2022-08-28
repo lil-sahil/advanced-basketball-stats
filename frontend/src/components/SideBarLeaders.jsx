@@ -66,7 +66,7 @@ const SideBarLeaders = (props) => {
 
     <>
         {isloading === true ? <LoadingSpinner></LoadingSpinner> : (
-            <div className="order-first flex-shrink-0 w-96 mx-2 my-2 py-6 px-4 border-2 rounded-2xl flex flex-col items-center justify-start text-center">
+            <div className="self-center order-first flex-shrink-0 w-96 mx-2 my-2 py-6 px-4 border-2 rounded-2xl flex flex-col items-center justify-start text-center">
 
                 <div>
                     Player Rankings

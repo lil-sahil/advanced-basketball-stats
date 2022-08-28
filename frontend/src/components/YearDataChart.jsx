@@ -21,6 +21,10 @@ import {
 
   import { years } from "../config/yearConfig";
 
+  import { statDictionary } from "../utils/convertStatsVerbiage";
+
+
+
   import LoadingSpinner from "./LoadingSpinner";
 
   
@@ -42,6 +46,7 @@ import {
 
     const options = {
       responsive: true,
+      maintainAspectRatio:false,
       scales: {
         x: {
           grid: {
@@ -127,8 +132,18 @@ import {
           },
         },
         title: {
-          display: false,
-          text: "Yearly Stats",
+          display: true,
+          text: () => {
+            for (const item in statDictionary) {
+              if (statDictionary[item] === props.statSelection) {
+                return item;
+              }
+            }
+          },
+          font: {
+            size:26,
+          },
+          color: "#ffffff",
         },
       },
 

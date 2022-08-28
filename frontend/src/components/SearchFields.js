@@ -202,7 +202,7 @@ const SearchFields = (props) => {
           onClick={
             props.searchOption === "Player" ? clickHandler : clickHandlerYear
           }
-          className="border px-4 py-2 bg-[#2980B9] rounded-md w-min"
+          className="border px-4 py-2 bg-[#2980B9] rounded-md w-min hover:bg-[#489cd3] hover:transition-colors hover:duration-500"
         >
           Search
         </button>

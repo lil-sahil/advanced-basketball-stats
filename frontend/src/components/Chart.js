@@ -19,6 +19,8 @@ import { getPlayerId } from "../utils/getPlayerId";
 
 import { fetchGeneralData } from "../utils/fetchGeneralData";
 
+import { statDictionary } from "../utils/convertStatsVerbiage";
+
 import LoadingSpinner from "./LoadingSpinner";
 
 const Chart = (props) => {
@@ -61,6 +63,7 @@ const Chart = (props) => {
 
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
     scales: {
       x: {
         grid: {
@@ -131,8 +134,18 @@ const Chart = (props) => {
         },
       },
       title: {
-        display: false,
-        text: "Player Stats",
+        display: true,
+        text: () => {
+          for (const item in statDictionary) {
+            if (statDictionary[item] === props.statSelection) {
+              return item;
+            }
+          }
+        },
+        font: {
+          size: 26,
+        },
+        color: "#ffffff",
       },
 
       filler: {
@@ -256,7 +269,10 @@ const Chart = (props) => {
       {isLoading === true ? (
         <LoadingSpinner></LoadingSpinner>
       ) : (
-        <div id="chart" className="w-8/12 ml-20 h-full">
+        <div
+          id="chart"
+          className=" flex flex-col justify-start w-8/12 ml-20 h-full"
+        >
           <Line options={options} data={data} />
         </div>
       )}

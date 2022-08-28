@@ -63,7 +63,7 @@ function App() {
         <></>
       )}
 
-      <div className="flex w-screen items-center p-12">
+      <div className="flex flex-row justify-center w-screen items-start p-12 h-5/6">
         {response === "Not valid" || response === undefined ? (
           <BadRequest></BadRequest>
         ) : searchOption === "Player" ? (

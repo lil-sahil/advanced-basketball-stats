@@ -1,4 +1,4 @@
-let statDictionary = {
+export let statDictionary = {
   "Minutes Played / Game": "mp_per_g",
   "Field Goals / Game": "fg_per_g",
   "Field Goals Attempted / Game": "fga_per_g",
