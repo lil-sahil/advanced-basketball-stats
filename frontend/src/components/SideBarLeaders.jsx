@@ -37,7 +37,6 @@ const SideBarLeaders = (props) => {
                 }))
                 year += 1
             }
-            console.log("IAMHERE")
             setIsloading(false)
             return sortObject(breakObject(topPlayers))
             
