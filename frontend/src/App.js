@@ -30,7 +30,14 @@ function App() {
     <div className="flex flex-col justify-start items-center h-screen box-border bg-main-background-dark text-white overflow-hidden">
       <div className="flex flex-row justify-between items-center border-b-2 w-full h-20">
         <Title></Title>
-        <BsGithub className="my-8 mr-4 self-end text-2xl"></BsGithub>
+        <div>
+          <a
+            href="https://github.com/lil-sahil/advanced-basketball-stats"
+            target="_blank"
+          >
+            <BsGithub className="my-8 mr-4 self-end text-2xl"></BsGithub>
+          </a>
+        </div>
       </div>
 
       <SearchFields
